@@ -6,6 +6,18 @@ id="org.apache.cordova.core.CompassListener"
     version="0.1.0">
     <name>Device Orientation</name>
 
+    <js-module src="www/CompassError.js" name="CompassError">
+        <clobbers target="CompassError" />
+    </js-module>
+
+    <js-module src="www/CompassHeading.js" name="CompassHeading">
+        <clobbers target="CompassHeading" />
+    </js-module>
+    
+    <js-module src="www/compass.js" name="compass">
+        <clobbers target="navigator.compass" />
+    </js-module>
+
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="plugins">
