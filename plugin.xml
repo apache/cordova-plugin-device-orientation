@@ -4,6 +4,7 @@
 xmlns:android="http://schemas.android.com/apk/res/android"
 id="org.apache.cordova.core.CompassListener"
     version="0.1.0">
+    
     <name>Device Orientation</name>
 
     <js-module src="www/CompassError.js" name="CompassError">
@@ -21,21 +22,21 @@ id="org.apache.cordova.core.CompassListener"
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="plugins">
-	    <plugin name="Compass" value="org.apache.cordova.core.CompassListener" />
-	</config-file>
+	        <plugin name="Compass" value="org.apache.cordova.core.CompassListener" />
+	    </config-file>
 
-	<source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/core" />
+	    <source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/core" />
     </platform>
     
     <!-- ios -->
     <platform name="ios">
         
         <config-file target="config.xml" parent="plugins">
-            <plugin name="Compass" value="CDVLocation"/>
+            <plugin name="Compass" value="CDVCompass"/>
         </config-file>
         
-	<header-file src="src/ios/CDVAccelerometer.h" />
-	<source-file src="src/ios/CDVAccelerometer.m" />
+	    <header-file src="src/ios/CDVCompass.h" />
+	    <source-file src="src/ios/CDVCompass.m" />
         
     </platform>
     

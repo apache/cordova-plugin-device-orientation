@@ -17,7 +17,7 @@
  under the License.
  */
 
-#import "CDVLocation.h"
+#import "CDVCompass.h"
 #import "NSArray+Comparisons.h"
 
 #pragma mark Constants
@@ -90,13 +90,13 @@
 #pragma mark -
 #pragma mark CDVLocation
 
-@implementation CDVLocation
+@implementation CDVCompass
 
 @synthesize locationManager, headingData, locationData;
 
 - (CDVPlugin*)initWithWebView:(UIWebView*)theWebView
 {
-    self = (CDVLocation*)[super initWithWebView:(UIWebView*)theWebView];
+    self = (CDVCompass*)[super initWithWebView:(UIWebView*)theWebView];
     if (self) {
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self; // Tells the location manager to send updates to this object
