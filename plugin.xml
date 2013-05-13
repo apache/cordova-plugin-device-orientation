@@ -22,21 +22,25 @@ id="org.apache.cordova.core.CompassListener"
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="plugins">
-	        <plugin name="Compass" value="org.apache.cordova.core.CompassListener" />
-	    </config-file>
+	    <feature name="Compass">
+	        <param name="android-package" value="org.apache.cordova.core.CompassListener"/>
+	    </feature>
+	</config-file>
 
-	    <source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/core" />
+	<source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/core" />
     </platform>
     
     <!-- ios -->
     <platform name="ios">
         
-        <config-file target="config.xml" parent="plugins">
-            <plugin name="Compass" value="CDVCompass"/>
+	<config-file target="config.xml" parent="plugins">
+	    <feature name="Compass">
+	        <param name="ios-package" value="CDVCompass"/>
+	    </feature>
         </config-file>
         
-	    <header-file src="src/ios/CDVCompass.h" />
-	    <source-file src="src/ios/CDVCompass.m" />
+	<header-file src="src/ios/CDVCompass.h" />
+	<source-file src="src/ios/CDVCompass.m" />
         
     </platform>
     
