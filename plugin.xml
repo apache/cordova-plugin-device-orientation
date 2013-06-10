@@ -26,6 +26,9 @@ id="org.apache.cordova.core.CompassListener"
 	        <param name="android-package" value="org.apache.cordova.core.CompassListener"/>
 	    </feature>
 	</config-file>
+	
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 	<source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/core" />
     </platform>
