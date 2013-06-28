@@ -22,8 +22,8 @@
 var argscheck = require('cordova/argscheck'),
     exec = require('cordova/exec'),
     utils = require('cordova/utils'),
-    CompassHeading = require('org.apache.cordova.core.CompassListener.CompassHeading'),
-    CompassError = require('org.apache.cordova.core.CompassListener.CompassError'),
+    CompassHeading = require('org.apache.cordova.core.device-orientation.CompassHeading'),
+    CompassError = require('org.apache.cordova.core.device-orientation.CompassError'),
 
     timers = {},
     compass = {
