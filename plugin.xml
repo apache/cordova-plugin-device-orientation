@@ -60,7 +60,22 @@
             <Capability Name="ID_CAP_SENSORS" />
         </config-file>
 
-        <source-file src="src/wp7/Compass.cs" />
+        <source-file src="src/wp/Compass.cs" />
+    </platform>
+
+        <!-- wp8 -->
+    <platform name="wp8">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Compass">
+                <param name="wp-package" value="Compass"/>
+            </feature>
+        </config-file>
+
+        <config-file target="Properties/WMAppManifest.xml" parent="/Deployment/App/Capabilities">
+            <Capability Name="ID_CAP_SENSORS" />
+        </config-file>
+
+        <source-file src="src/wp/Compass.cs" />
     </platform>
     
 </plugin>
