@@ -26,7 +26,7 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
 	        <feature name="Compass">
-	            <param name="android-package" value="org.apache.cordova.core.CompassListener"/>
+	            <param name="android-package" value="org.apache.cordova.deviceorientation.CompassListener"/>
 	        </feature>
 	    </config-file>
 	
@@ -35,7 +35,7 @@
             <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
         </config-file>
 
-	    <source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/core" />
+	    <source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/deviceorientation" />
     </platform>
     
     <!-- ios -->
