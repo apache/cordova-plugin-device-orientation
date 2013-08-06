@@ -6,7 +6,7 @@
     
     <name>Device Orientation</name>
     <description>Cordova Device Orientation Plugin</description>
-    <license>Apache</license>
+    <license>Apache 2.0</license>
     <keywords>cordova,device,orientation</keywords>
 
     <js-module src="www/CompassError.js" name="CompassError">
