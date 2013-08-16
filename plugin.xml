@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="org.apache.cordova.core.device-orientation"
     version="0.2.0">
-    
+
     <name>Device Orientation</name>
     <description>Cordova Device Orientation Plugin</description>
     <license>Apache 2.0</license>
@@ -17,7 +17,7 @@
     <js-module src="www/CompassHeading.js" name="CompassHeading">
         <clobbers target="CompassHeading" />
     </js-module>
-    
+
     <js-module src="www/compass.js" name="compass">
         <clobbers target="navigator.compass" />
     </js-module>
@@ -29,7 +29,7 @@
 	            <param name="android-package" value="org.apache.cordova.deviceorientation.CompassListener"/>
 	        </feature>
 	    </config-file>
-	
+
 	    <config-file target="AndroidManifest.xml" parent="/*">
 	        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
             <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -37,19 +37,27 @@
 
 	    <source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/deviceorientation" />
     </platform>
-    
+
+    <!-- blackberry10 -->
+    <platform name="blackberry10">
+        <config-file target="www/config.xml" parent="/widget">
+            <feature name="Compass" value="Compass" />
+        </config-file>
+        <source-file src="src/blackberry10/index.js" target-dir="Compass" />
+    </platform>
+
     <!-- ios -->
     <platform name="ios">
-        
+
         <config-file target="config.xml" parent="/*">
 	        <feature name="Compass">
 	            <param name="ios-package" value="CDVCompass"/>
 	        </feature>
         </config-file>
-        
+
 	    <header-file src="src/ios/CDVCompass.h" />
 	    <source-file src="src/ios/CDVCompass.m" />
-        
+
     </platform>
 
     <!-- wp7 -->
@@ -88,5 +96,5 @@
             <merges target="" />
         </js-module>
     </platform>
-    
+
 </plugin>
