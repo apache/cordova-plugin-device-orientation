@@ -1,4 +1,4 @@
-/*
+cordova.define("org.apache.cordova.core.device-orientation.CompassProxy", function(require, exports, module) {/*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -33,7 +33,7 @@ module.exports = {
         var deviceCompass = Windows.Devices.Sensors.Compass.getDefault();
         if(!deviceCompass) {
             setTimeout(function(){
-                lose(new CompassError(CompassError.COMPASS_NOT_SUPPORTED));
+                lose(CompassError.COMPASS_NOT_SUPPORTED);
             },0);
         }
         else {
@@ -42,18 +42,17 @@ module.exports = {
 
             this.onReadingChanged = function(e) {
                 var reading = e.reading;
-                var heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth);
+                var heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth,null,reading.timestamp);
                 win(heading);
             };
             deviceCompass.addEventListener("readingchanged",this.onReadingChanged);
         }
-
     },
     stopHeading:function(win,lose) {
         var deviceCompass = Windows.Devices.Sensors.Compass.getDefault();
         if(!deviceCompass) {
             setTimeout(function(){
-                lose(new CompassError(CompassError.COMPASS_NOT_SUPPORTED));
+                lose(CompassError.COMPASS_NOT_SUPPORTED);
             },0);
         }
         else {
@@ -66,4 +65,4 @@ module.exports = {
     }
 };
 
-require("cordova/commandProxy").add("Compass",module.exports);
+require("cordova/commandProxy").add("Compass",module.exports);});
