@@ -22,7 +22,8 @@
 /*global Windows:true */
 
 var cordova = require('cordova'),
-    CompassHeading = require('org.apache.cordova.core.device-orientation.CompassHeading');
+    CompassHeading = require('org.apache.cordova.core.device-orientation.CompassHeading'),
+    CompassError = require('org.apache.cordova.core.device-orientation.CompassError')
 
 
 module.exports = {
@@ -31,7 +32,9 @@ module.exports = {
     getHeading:function(win,lose) {
         var deviceCompass = Windows.Devices.Sensors.Compass.getDefault();
         if(!deviceCompass) {
-            setTimeout(function(){lose("Compass not available");},0);
+            setTimeout(function(){
+                lose(new CompassError(CompassError.COMPASS_NOT_SUPPORTED));
+            },0);
         }
         else {
 
@@ -49,10 +52,11 @@ module.exports = {
     stopHeading:function(win,lose) {
         var deviceCompass = Windows.Devices.Sensors.Compass.getDefault();
         if(!deviceCompass) {
-            setTimeout(function(){lose("Compass not available");},0);
+            setTimeout(function(){
+                lose(new CompassError(CompassError.COMPASS_NOT_SUPPORTED));
+            },0);
         }
         else {
-
             deviceCompass.removeEventListener("readingchanged",this.onReadingChanged);
             this.onReadingChanged = null;
             deviceCompass.reportInterval = 0;
