@@ -65,4 +65,4 @@ module.exports = {
     }
 };
 
-require("cordova/commandProxy").add("Compass",module.exports);});
+require("cordova/windows8/commandProxy").add("Compass",module.exports);});
