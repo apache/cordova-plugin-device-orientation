@@ -1,4 +1,4 @@
-cordova.define("org.apache.cordova.core.device-orientation.CompassProxy", function(require, exports, module) {/*
+cordova.define("org.apache.cordova.device-orientation.CompassProxy", function(require, exports, module) {/*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,8 +22,8 @@ cordova.define("org.apache.cordova.core.device-orientation.CompassProxy", functi
 /*global Windows:true */
 
 var cordova = require('cordova'),
-    CompassHeading = require('org.apache.cordova.core.device-orientation.CompassHeading'),
-    CompassError = require('org.apache.cordova.core.device-orientation.CompassError')
+    CompassHeading = require('org.apache.cordova.device-orientation.CompassHeading'),
+    CompassError = require('org.apache.cordova.device-orientation.CompassError')
 
 
 module.exports = {
