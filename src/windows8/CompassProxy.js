@@ -1,4 +1,4 @@
-cordova.define("org.apache.cordova.device-orientation.CompassProxy", function(require, exports, module) {/*
+/*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -19,44 +19,43 @@ cordova.define("org.apache.cordova.device-orientation.CompassProxy", function(re
  *
 */
 
-/*global Windows:true */
+/*jslint sloppy:true */
+/*global Windows:true, require, module, setTimeout */
 
 var cordova = require('cordova'),
     CompassHeading = require('org.apache.cordova.device-orientation.CompassHeading'),
-    CompassError = require('org.apache.cordova.device-orientation.CompassError')
+    CompassError = require('org.apache.cordova.device-orientation.CompassError');
 
 
 module.exports = {
 
-    onReadingChanged:null,
-    getHeading:function(win,lose) {
+    onReadingChanged: null,
+    getHeading: function (win, lose) {
         var deviceCompass = Windows.Devices.Sensors.Compass.getDefault();
-        if(!deviceCompass) {
-            setTimeout(function(){
+        if (!deviceCompass) {
+            setTimeout(function () {
                 lose(CompassError.COMPASS_NOT_SUPPORTED);
-            },0);
-        }
-        else {
+            }, 0);
+        } else {
 
-            deviceCompass.reportInterval = Math.max(16,deviceCompass.minimumReportInterval);
+            deviceCompass.reportInterval = Math.max(16, deviceCompass.minimumReportInterval);
 
-            this.onReadingChanged = function(e) {
-                var reading = e.reading;
-                var heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth,null,reading.timestamp);
+            this.onReadingChanged = function (e) {
+                var reading = e.reading,
+                    heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth, null, reading.timestamp);
                 win(heading);
             };
-            deviceCompass.addEventListener("readingchanged",this.onReadingChanged);
+            deviceCompass.addEventListener("readingchanged", this.onReadingChanged);
         }
     },
-    stopHeading:function(win,lose) {
+    stopHeading: function (win, lose) {
         var deviceCompass = Windows.Devices.Sensors.Compass.getDefault();
-        if(!deviceCompass) {
-            setTimeout(function(){
+        if (!deviceCompass) {
+            setTimeout(function () {
                 lose(CompassError.COMPASS_NOT_SUPPORTED);
-            },0);
-        }
-        else {
-            deviceCompass.removeEventListener("readingchanged",this.onReadingChanged);
+            }, 0);
+        } else {
+            deviceCompass.removeEventListener("readingchanged", this.onReadingChanged);
             this.onReadingChanged = null;
             deviceCompass.reportInterval = 0;
             win();
@@ -65,4 +64,4 @@ module.exports = {
     }
 };
 
-require("cordova/windows8/commandProxy").add("Compass",module.exports);});
+require("cordova/windows8/commandProxy").add("Compass", module.exports);
