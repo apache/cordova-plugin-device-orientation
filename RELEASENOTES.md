@@ -23,3 +23,11 @@
 
 ### 0.3.0 (Sept 5, 2013)
 * [CB-3687] Added blackberry10 support
+
+### 0.3.1 (Sept 25, 2013)
+* CB-4889 renaming id
+* CB-4889 renaming core in CompassProxy
+* [CB-4900] Windows 8 Compass plugin have extra define breaks plugin loading
+* [windows8] commandProxy was moved
+* Rename CHANGELOG.md -> RELEASENOTES.md
+* [CB-4752] Incremented plugin version on dev branch.
