@@ -24,6 +24,19 @@
         <clobbers target="navigator.compass" />
     </js-module>
 
+    <!-- firefoxos -->
+    <platform name="firefoxos">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Compass">
+                <param name="firefoxos-package" value="Compass" />
+            </feature>
+        </config-file>                                         
+        
+        <js-module src="src/firefoxos/compass.js" name="compass-impl">
+          <runs />
+        </js-module>
+    </platform>
+
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
