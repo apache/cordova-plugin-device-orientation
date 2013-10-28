@@ -31,3 +31,8 @@
 * [windows8] commandProxy was moved
 * Rename CHANGELOG.md -> RELEASENOTES.md
 * [CB-4752] Incremented plugin version on dev branch.
+
+### 0.3.2 (Oct 28, 2013)
+* orientation plugin
+* CB-5128: added repo + issue tag to plugin.xml for device orientation plugin
+* [CB-4915] Incremented plugin version on dev branch.
