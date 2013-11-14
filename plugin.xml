@@ -53,6 +53,22 @@
 	    <source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/deviceorientation" />
     </platform>
 
+    <!-- amazon-fireos -->
+    <platform name="amazon-fireos">
+        <config-file target="res/xml/config.xml" parent="/*">
+	        <feature name="Compass">
+	            <param name="android-package" value="org.apache.cordova.deviceorientation.CompassListener"/>
+	        </feature>
+	    </config-file>
+
+	    <config-file target="AndroidManifest.xml" parent="/*">
+	        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        </config-file>
+
+	    <source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/deviceorientation" />
+    </platform>
+    
     <!-- blackberry10 -->
     <platform name="blackberry10">
         <config-file target="www/config.xml" parent="/widget">
