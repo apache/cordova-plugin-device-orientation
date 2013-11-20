@@ -53,6 +53,12 @@
 	    <source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/deviceorientation" />
     </platform>
 
+    <!-- ubuntu -->
+    <platform name="ubuntu">
+        <header-file src="src/ubuntu/compass.h" />
+        <source-file src="src/ubuntu/compass.cpp" />
+    </platform>
+
     <!-- blackberry10 -->
     <platform name="blackberry10">
         <config-file target="www/config.xml" parent="/widget">
