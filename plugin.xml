@@ -112,4 +112,10 @@
         </js-module>
     </platform>
 
+    <!-- tizen -->
+    <platform name="tizen">
+        <js-module src="src/tizen/CompassProxy.js" name="CompassProxy">
+            <runs/>
+        </js-module>
+    </platform>
 </plugin>
