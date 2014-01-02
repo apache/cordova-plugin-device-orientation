@@ -40,3 +40,6 @@
 ### 0.3.3 (Dec 4, 2013)
 * add ubuntu platform
 * 1. Added amazon-fireos platform. 2. Change to use amazon-fireos as a platform if user agent string contains 'cordova-amazon-fireos'.
+
+### 0.3.4 (Jan 02, 2014)
+* CB-5658 Add doc/index.md for Compass plugin
