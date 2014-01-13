@@ -33,6 +33,7 @@ from the top of the device.  It measures the heading in degrees from 0 to
 - Amazon Fire OS
 - Android
 - BlackBerry 10
+- Firefox OS
 - iOS
 - Tizen
 - Windows Phone 7 and 8 (if available in hardware)
@@ -112,6 +113,10 @@ with time intervals.
 
 - No support for `filter`.
 
+### Firefox OS Quirks
+
+- No support for `filter`.
+
 ### Tizen Quirks
 
 - No support for `filter`.
@@ -158,6 +163,12 @@ A `CompassHeading` object is returned to the `compassSuccess` callback function.
 - `headingAccuracy` is always 0 because there is no difference between the `magneticHeading` and `trueHeading`
 
 ### Android Quirks
+
+- The `trueHeading` property is not supported, but reports the same value as `magneticHeading`.
+
+- The `headingAccuracy` property is always 0 because there is no difference between the `magneticHeading` and `trueHeading`.
+
+### Firefox OS Quirks
 
 - The `trueHeading` property is not supported, but reports the same value as `magneticHeading`.
 
