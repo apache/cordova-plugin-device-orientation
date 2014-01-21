@@ -73,6 +73,11 @@
     <platform name="ubuntu">
         <header-file src="src/ubuntu/compass.h" />
         <source-file src="src/ubuntu/compass.cpp" />
+        <config-file target="config.xml" parent="/*">
+            <feature name="DeviceOrientation">
+                <param policy_group="sensors" policy_version="1" />
+            </feature>
+        </config-file>
     </platform>
 
     <!-- blackberry10 -->
