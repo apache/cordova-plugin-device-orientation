@@ -1,4 +1,4 @@
-/*
+﻿/*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -42,7 +42,7 @@ module.exports = {
 
             this.onReadingChanged = function (e) {
                 var reading = e.reading,
-                    heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth, null, reading.timestamp);
+                    heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth, null, reading.timestamp.getTime());
                 win(heading);
             };
             deviceCompass.addEventListener("readingchanged", this.onReadingChanged);
