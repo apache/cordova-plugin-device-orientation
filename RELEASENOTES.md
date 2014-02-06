@@ -43,3 +43,9 @@
 
 ### 0.3.4 (Jan 02, 2014)
 * CB-5658 Add doc/index.md for Compass plugin
+
+### 0.3.5 (Feb 05, 2014)
+* [ubuntu] request sensors permission
+* [ubuntu] add missing files
+* Add support for Tizen.
+* FFOS info added
