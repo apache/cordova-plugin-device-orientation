@@ -142,7 +142,7 @@ namespace WPCordovaClassLib.Cordova.Commands
         {
             if (!DeviceCompass.IsSupported)
             {
-                DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, "{code:" + Not_Supported + "}"));
+                DispatchCommandResult(new PluginResult(PluginResult.Status.ERROR, Not_Supported));
             }
             else
             {
