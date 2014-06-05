@@ -56,3 +56,8 @@
 * CB-6460: Update license headers
 * CB-6465: Add license headers to Tizen code
 * Add NOTICE file
+
+### 0.3.7 (Jun 05, 2014)
+* CB-6799 Add license
+* windows8. makes getHeading callback spec compliant
+* CB-6491 add CONTRIBUTING.md
