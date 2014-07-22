@@ -19,7 +19,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Cordova/CDVPlugin.h>
-#import <Cordova/CDVShared.h>
 
 enum CDVHeadingStatus {
     HEADINGSTOPPED = 0,
