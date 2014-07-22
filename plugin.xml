@@ -108,16 +108,16 @@
 
     <!-- ios -->
     <platform name="ios">
-
         <config-file target="config.xml" parent="/*">
-	        <feature name="Compass">
-	            <param name="ios-package" value="CDVCompass"/>
-	        </feature>
+            <feature name="Compass">
+                <param name="ios-package" value="CDVCompass"/>
+            </feature>
         </config-file>
 
-	    <header-file src="src/ios/CDVCompass.h" />
-	    <source-file src="src/ios/CDVCompass.m" />
+        <header-file src="src/ios/CDVCompass.h" />
+        <source-file src="src/ios/CDVCompass.m" />
 
+        <framework src="CoreLocation.framework" />
     </platform>
 
     <!-- wp7 -->

@@ -18,6 +18,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import <Cordova/CDVPlugin.h>
 
 enum CDVHeadingStatus {
