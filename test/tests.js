@@ -215,22 +215,30 @@ exports.defineManualTests = function (contentEl, createActionButton) {
 
     /******************************************************************************/
 
+    var orientation_tests = '<h3>iOS devices may bring up a calibration screen when initiating these tests</h3>' +
+        '<div id="getCompass"></div>' +
+        'Expected result: Will update the status box with current heading. Status will read "Stopped"' +
+        '<p/> <div id="watchCompass"></div>' +
+        'Expected result: When pressed, will start a watch on the compass and update the heading value when heading reading changes. Status will read "Running"' +
+        '<p/> <div id="stopCompass"></div>' +
+        'Expected result: Will clear the compass watch, so heading value will no longer be updated. Status will read "Stopped"';
+
     contentEl.innerHTML = '<div id="info"><b>Status: </b>' +
         '<span id="compass_status">Stopped</span>' +
         '<table width="100%"><tr>' +
         '<td width="33%">Heading: <span id="compassHeading"></span>' +
         '</td></tr></table></div>' +
-        '<div id="actions"></div>';
+        orientation_tests;
 
     createActionButton('Get Compass', function () {
         getCompass();
-    }, 'actions');
+    }, 'getCompass');
 
     createActionButton('Start Watching Compass', function () {
         watchCompass();
-    }, 'actions');
+    }, 'watchCompass');
 
     createActionButton('Stop Watching Compass', function () {
         stopCompass();
-    }, 'actions');
+    }, 'stopCompass');
 };
