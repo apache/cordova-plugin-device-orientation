@@ -162,6 +162,9 @@ exports.defineManualTests = function (contentEl, createActionButton) {
             setCompassStatus(e);
         };
 
+        // Stop compass if running
+        stopCompass();
+
         // Update heading every 1 sec
         var opt = {};
         opt.frequency = 1000;
