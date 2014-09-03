@@ -219,7 +219,7 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         '<div id="getCompass"></div>' +
         'Expected result: Will update the status box with current heading. Status will read "Stopped"' +
         '<p/> <div id="watchCompass"></div>' +
-        'Expected result: When pressed, will start a watch on the compass and update the heading value when heading reading changes. Status will read "Running"' +
+        'Expected result: When pressed, will start a watch on the compass and update the heading value when heading changes. Status will read "Running"' +
         '<p/> <div id="stopCompass"></div>' +
         'Expected result: Will clear the compass watch, so heading value will no longer be updated. Status will read "Stopped"';
 
