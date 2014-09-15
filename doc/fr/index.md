@@ -31,6 +31,7 @@ Ce plugin permet d'accéder à la boussole de l'appareil. La boussole est un cap
 *   Amazon Fire OS
 *   Android
 *   BlackBerry 10
+*   Navigateur
 *   Firefox OS
 *   iOS
 *   Paciarelli
@@ -95,9 +96,13 @@ Le code retourné montre fait référence à l'intervalle montre boussole. La mo
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
     
 
+### Bizarreries navigateur
+
+Valeurs pour la rubrique actuelle sont générés au hasard afin de simuler la boussole.
+
 ### iOS Quirks
 
-Seulement un `watchHeading` peut être utilisé à un moment donné sur iOS. Si un `watchHeading` utilise un filtre, un appel à `getCurrentHeading` ou `watchHeading` utilise la valeur existante de filtre pour spécifier des changements de direction. Surveiller les changements de position avec un filtre est plus efficace qu'avec des intervalles de temps.
+Seul `watchHeading` peut être en effet à un moment donné dans l'iOS. Si un `watchHeading` utilise un filtre, appeler `getCurrentHeading` ou `watchHeading` utilise la valeur existante de filtre pour spécifier des changements de position. En regardant les changements de position avec un filtre est plus efficace qu'avec des intervalles de temps.
 
 ### Amazon Fire OS Quirks
 
@@ -139,7 +144,7 @@ Arrêter de regarder la boussole référencée par le paramètre ID de montre.
 
 ## CompassHeading
 
-Un objet `CompassHeading` est retourné à la fonction de callback `compassSuccess`.
+A `CompassHeading` objet est retourné à la `compassSuccess` fonction de rappel.
 
 ### Propriétés
 
@@ -177,7 +182,7 @@ Un objet `CompassHeading` est retourné à la fonction de callback `compassSucce
 
 ## CompassError
 
-Un objet `CompassError` est retourné à la fonction de callback `compassError` lorsqu'une erreur survient.
+A `CompassError` objet est retourné à la `compassError` fonction de rappel lorsqu'une erreur survient.
 
 ### Propriétés
 

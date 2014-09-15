@@ -31,6 +31,7 @@ Este plugin proporciona acceso al compás del dispositivo. La brújula es un sen
 *   Amazon fuego OS
 *   Android
 *   BlackBerry 10
+*   Explorador
 *   Firefox OS
 *   iOS
 *   Tizen
@@ -95,9 +96,13 @@ El identificador devuelto reloj hace referencia al intervalo de reloj brújula. 
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
     
 
+### Navegador rarezas
+
+Los valores de partida actual son generados al azar para simular la brújula.
+
 ### iOS rarezas
 
-Solamente un `watchHeading` puede ser en efecto al mismo tiempo en iOS. Si un `watchHeading` utiliza un filtro llamado `getCurrentHeading` o `watchHeading` el valor existente de filtro se utiliza para especificar cambios de rumbo. Observando los cambios de rumbo con un filtro es más eficiente que con intervalos de tiempo.
+Solamente un `watchHeading` puede ser en efecto a la vez en iOS. Si un `watchHeading` utiliza un filtro, llamando a `getCurrentHeading` o `watchHeading` utiliza el valor existente del filtro para especificar los cambios de rumbo. Observando los cambios de rumbo con un filtro es más eficiente que con intervalos de tiempo.
 
 ### Amazon fuego OS rarezas
 

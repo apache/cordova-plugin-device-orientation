@@ -31,10 +31,11 @@
 *   アマゾン火 OS
 *   アンドロイド
 *   ブラックベリー 10
+*   ブラウザー
 *   Firefox の OS
 *   iOS
 *   Tizen
-*   Windows Phone 7 および 8 (ハードウェアである場合)
+*   Windows Phone 7 および 8 (可能な場合ハードウェアで)
 *   Windows 8
 
 ## メソッド
@@ -95,9 +96,13 @@
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
     
 
+### ブラウザーの癖
+
+現在の見出しの値は、コンパスをシミュレートするためにランダムに生成されます。
+
 ### iOS の癖
 
-1 つだけ `watchHeading` iOS で一度に有効にすることができます。 場合は、 `watchHeading` 、フィルターを使用して呼び出す `getCurrentHeading` または `watchHeading` 既存のフィルターの値を使用して見出しの変更を指定します。 フィルターを使用して見出しの変更を見て時間間隔よりも効率的です。
+1 つだけ `watchHeading` iOS で一度に有効にすることができます。 場合は、 `watchHeading` 、フィルターを使用して呼び出す `getCurrentHeading` または `watchHeading` 既存のフィルターの値を使用して見出しの変更を指定します。 フィルターを使用して見出しの変更を見て時間間隔よりも効率的にファイルです。
 
 ### アマゾン火 OS 癖
 

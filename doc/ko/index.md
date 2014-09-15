@@ -31,10 +31,11 @@
 *   아마존 화재 운영 체제
 *   안 드 로이드
 *   블랙베리 10
+*   브라우저
 *   Firefox 운영 체제
 *   iOS
 *   Tizen
-*   Windows Phone 7 및 8 (해당 되는 경우 하드웨어 사용 가능)
+*   Windows Phone 7, 8 (사용 가능한 경우 하드웨어)
 *   윈도우 8
 
 ## 메서드
@@ -94,6 +95,10 @@
     
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
     
+
+### 브라우저 만지면
+
+현재 제목에 대 한 값은 나침반을 시뮬레이션 하기 위해 임의로 생성 됩니다.
 
 ### iOS 단점
 

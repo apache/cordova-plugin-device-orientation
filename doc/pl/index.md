@@ -31,6 +31,7 @@ Ten plugin umożliwia dostęp do urządzenia kompas. Kompas jest czujnik, który
 *   Amazon ogień OS
 *   Android
 *   Jeżyna 10
+*   Przeglądarka
 *   Firefox OS
 *   iOS
 *   Tizen
@@ -95,6 +96,10 @@ Identyfikator zwrócony zegarek odwołuje interwał kompas zegarek. Oglądaj ide
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
     
 
+### Quirks przeglądarki
+
+Wartości dla bieżącej pozycji są losowo generowane w celu symulacji kompas.
+
 ### iOS dziwactwa
 
 Tylko jeden `watchHeading` może być efekt w tym samym czasie w iOS. Jeśli `watchHeading` używa filtru, wywołanie `getCurrentHeading` lub `watchHeading` używa istniejących wartości filtru określić zmiany pozycji. Obserwując zmiany pozycji z filtrem jest bardziej efektywne niż z odstępach czasu.
@@ -121,7 +126,7 @@ Tylko jeden `watchHeading` może być efekt w tym samym czasie w iOS. Jeśli `wa
 
 ## navigator.compass.clearWatch
 
-Zatrzymuje obserwowanie kompasu określonego przez parametr watchID.
+Przestać oglądać określany przez parametr ID Zegarek kompas.
 
     navigator.compass.clearWatch(watchID);
     

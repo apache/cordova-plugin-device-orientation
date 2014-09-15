@@ -31,6 +31,7 @@ Questo plugin consente di accedere alla bussola del dispositivo. La bussola è u
 *   Amazon fuoco OS
 *   Android
 *   BlackBerry 10
+*   Browser
 *   Firefox OS
 *   iOS
 *   Tizen
@@ -94,6 +95,10 @@ L'orologio restituito ID fa riferimento l'intervallo orologio bussola. L'orologi
     
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
     
+
+### Stranezze browser
+
+I valori per la rubrica attuale sono generati casualmente al fine di simulare la bussola.
 
 ### iOS stranezze
 

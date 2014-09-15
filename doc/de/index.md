@@ -31,6 +31,7 @@ Dieses Plugin ermöglicht den Zugriff auf das Gerät Kompass. Der Kompass ist ei
 *   Amazon Fire OS
 *   Android
 *   BlackBerry 10
+*   Browser
 *   Firefox OS
 *   iOS
 *   Tizen
@@ -95,6 +96,10 @@ Die zurückgegebenen Watch-ID verweist das Kompass-Uhr-Intervall. Die Uhr, die I
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
     
 
+### Browser-Eigenheiten
+
+Werte für aktuelle Überschrift werden nach dem Zufallsprinzip generiert, um den Kompass zu simulieren.
+
 ### iOS Macken
 
 Nur ein `watchHeading` kann in der Tat auf einmal in iOS sein. Wenn ein `watchHeading` benutzt einen Filter Aufrufen von `getCurrentHeading` oder `watchHeading` verwendet den Wert des vorhandenen Filters Überschrift Änderungen festlegen. Überschrift Veränderungen beobachten, mit einem Filter ist effizienter als mit Zeitintervallen.
@@ -121,7 +126,7 @@ Nur ein `watchHeading` kann in der Tat auf einmal in iOS sein. Wenn ein `watchHe
 
 ## navigator.compass.clearWatch
 
-Stoppen Sie, beobachten den Kompass auf der Uhr-ID-Parameter verweist.
+Stoppen Sie, beobachten den Kompass auf der Watch-ID-Parameter verweist.
 
     navigator.compass.clearWatch(watchID);
     
@@ -139,7 +144,7 @@ Stoppen Sie, beobachten den Kompass auf der Uhr-ID-Parameter verweist.
 
 ## CompassHeading
 
-Ein `CompassHeading` Objekt wird an die `CompassSuccess` Callback-Funktion zurückgegeben.
+A `CompassHeading` Objekt wird zurückgegeben, um die `compassSuccess` Callback-Funktion.
 
 ### Eigenschaften
 

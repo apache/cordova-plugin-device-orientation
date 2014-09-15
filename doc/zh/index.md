@@ -31,10 +31,11 @@
 *   亞馬遜火 OS
 *   Android 系統
 *   黑莓 10
-*   火狐瀏覽器作業系統
+*   瀏覽器
+*   火狐瀏覽器的作業系統
 *   iOS
-*   Tizen
-*   Windows Phone 7 和 8 （如果在硬體中可用）
+*   泰
+*   Windows Phone 7 和第 8 （如果在硬體中可用）
 *   Windows 8
 
 ## 方法
@@ -95,9 +96,13 @@
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
     
 
+### 瀏覽器的怪癖
+
+隨機生成當前標題的值，以便類比羅盤。
+
 ### iOS 的怪癖
 
-只有一個 `watchHeading` 可以在 iOS 中一次效果。 如果 `watchHeading` 使用篩選器中，調用 `getCurrentHeading` 或 `watchHeading` 使用現有的篩選器值來指定標題的更改。 使用篩選器看標題的變化是與時間間隔比效率更高。
+只有一個 `watchHeading` 可以在 iOS 中一次的效果。 如果 `watchHeading` 使用篩選器中，調用 `getCurrentHeading` 或 `watchHeading` 使用現有的篩選器值來指定標題的變化。 帶有篩選器看標題的變化是與時間間隔比效率更高。
 
 ### 亞馬遜火 OS 怪癖
 
@@ -111,17 +116,17 @@
 
 *   不支援`filter`.
 
-### Tizen 怪癖
+### 泰怪癖
 
 *   不支援`filter`.
 
-### Windows Phone 7 和 8 怪癖
+### Windows Phone 7 和 8 的怪癖
 
 *   不支援`filter`.
 
 ## navigator.compass.clearWatch
 
-再看看 ID 參數所引用的指南針。
+別看手錶 ID 參數所引用的指南針。
 
     navigator.compass.clearWatch(watchID) ；
     
