@@ -108,7 +108,7 @@ Nur ein `watchHeading` kann in der Tat auf einmal in iOS sein. Wenn ein `watchHe
 
 *   `filter`wird nicht unterstützt.
 
-### Android Macken
+### Android Eigenarten
 
 *   Keine Unterstützung für`filter`.
 
@@ -120,7 +120,7 @@ Nur ein `watchHeading` kann in der Tat auf einmal in iOS sein. Wenn ein `watchHe
 
 *   Keine Unterstützung für`filter`.
 
-### Windows Phone 7 und 8 Macken
+### Windows Phone 7 und 8 Eigenarten
 
 *   Keine Unterstützung für`filter`.
 
@@ -144,7 +144,7 @@ Stoppen Sie, beobachten den Kompass auf der Watch-ID-Parameter verweist.
 
 ## CompassHeading
 
-A `CompassHeading` Objekt wird zurückgegeben, um die `compassSuccess` Callback-Funktion.
+Ein `CompassHeading` Objekt wird an die `CompassSuccess` Callback-Funktion zurückgegeben.
 
 ### Eigenschaften
 
@@ -162,7 +162,7 @@ A `CompassHeading` Objekt wird zurückgegeben, um die `compassSuccess` Callback-
 
 *   `headingAccuracy`ist immer 0 da es keinen Unterschied zwischen gibt der `magneticHeading` und`trueHeading`
 
-### Android Macken
+### Android Eigenarten
 
 *   Die `trueHeading` -Eigenschaft wird nicht unterstützt, jedoch meldet den gleichen Wert wie`magneticHeading`.
 

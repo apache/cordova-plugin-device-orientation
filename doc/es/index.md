@@ -28,7 +28,7 @@ Este plugin proporciona acceso al compás del dispositivo. La brújula es un sen
 
 ## Plataformas soportadas
 
-*   Amazon fuego OS
+*   Amazon fire OS
 *   Android
 *   BlackBerry 10
 *   Explorador
@@ -102,7 +102,7 @@ Los valores de partida actual son generados al azar para simular la brújula.
 
 ### iOS rarezas
 
-Solamente un `watchHeading` puede ser en efecto a la vez en iOS. Si un `watchHeading` utiliza un filtro, llamando a `getCurrentHeading` o `watchHeading` utiliza el valor existente del filtro para especificar los cambios de rumbo. Observando los cambios de rumbo con un filtro es más eficiente que con intervalos de tiempo.
+Sólo un `watchHeading` puede ser en efecto a la vez en iOS. Si un `watchHeading` utiliza un filtro, llamando al `getCurrentHeading` o `watchHeading` utiliza el valor existente de filtro para especificar los cambios de rumbo. Observando los cambios de rumbo con un filtro es más eficiente que con intervalos de tiempo.
 
 ### Amazon fuego OS rarezas
 
@@ -186,7 +186,7 @@ A `CompassError` objeto es devuelto a la `compassError` función de devolución 
 
 ### Propiedades
 
-*   **código**: uno de los códigos de error predefinido enumerados a continuación.
+*   **code**: uno de los códigos de error predefinido enumerados a continuación.
 
 ### Constantes
 
