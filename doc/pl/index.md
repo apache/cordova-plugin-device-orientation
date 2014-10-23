@@ -178,8 +178,6 @@ A `CompassHeading` obiekt jest zwracany do `compassSuccess` funkcji wywołania z
 
 *   `trueHeading`Właściwość jest zwracana tylko dla lokalizacji usług włączone za pomocą`navigator.geolocation.watchLocation()`.
 
-*   Urządzeń iOS 4 i powyżej pozycji czynniki w orientacji bieżącego urządzenia, a nie odwołuje się do pozycji absolutnej, dla aplikacji, które obsługuje tej orientacji.
-
 ## CompassError
 
 A `CompassError` obiekt jest zwracany do `compassError` funkcji wywołania zwrotnego, gdy wystąpi błąd.

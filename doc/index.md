@@ -183,8 +183,6 @@ A `CompassHeading` object is returned to the `compassSuccess` callback function.
 
 - The `trueHeading` property is only returned for location services enabled via `navigator.geolocation.watchLocation()`.
 
-- For iOS 4 devices and above, heading factors in the device's current orientation, and does not reference its absolute position, for apps that supports that orientation.
-
 ## CompassError
 
 A `CompassError` object is returned to the `compassError` callback function when an error occurs.

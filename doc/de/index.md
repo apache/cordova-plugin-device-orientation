@@ -178,8 +178,6 @@ Ein `CompassHeading` Objekt wird an die `CompassSuccess` Callback-Funktion zurü
 
 *   Die `trueHeading` -Eigenschaft nur für Ortungsdienste aktiviert über zurückgegeben`navigator.geolocation.watchLocation()`.
 
-*   Für iOS 4 Geräte oben Rubrik Faktoren in das Gerät aktuelle Ausrichtung und verweist nicht auf die absolute Position für Anwendungen, die diese Ausrichtung unterstützt.
-
 ## CompassError
 
 A `CompassError` Objekt wird zurückgegeben, um die `compassError` Callback-Funktion, wenn ein Fehler auftritt.

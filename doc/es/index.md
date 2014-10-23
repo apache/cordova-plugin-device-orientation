@@ -178,8 +178,6 @@ A `CompassHeading` objeto es devuelto a la `compassSuccess` función de callback
 
 *   El `trueHeading` propiedad es devuelto sólo para servicios de localización habilitados mediante`navigator.geolocation.watchLocation()`.
 
-*   Para los dispositivos iOS 4 arriba, rumbo factores en la orientación actual del dispositivo y no hace referencia a su posición absoluta, para aplicaciones que apoya esa orientación.
-
 ## CompassError
 
 A `CompassError` objeto es devuelto a la `compassError` función de devolución de llamada cuando se produce un error.
