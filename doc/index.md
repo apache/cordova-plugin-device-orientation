@@ -24,6 +24,15 @@ that detects the direction or heading that the device is pointed, typically
 from the top of the device.  It measures the heading in degrees from 0 to
 359.99, where 0 is north.
 
+Access is via a global `navigator.compass` object.
+
+Although the object is attached to the global scoped `navigator`, it is not available until after the `deviceready` event.
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(navigator.compass);
+    }
+
 ## Installation
 
     cordova plugin add org.apache.cordova.device-orientation
