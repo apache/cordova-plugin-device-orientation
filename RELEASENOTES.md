@@ -80,3 +80,8 @@
 * CB-7249 cordova-plugin-device-orientation documentation translation
 * CB-6960 Added manual tests
 * CB-6960 Port compass tests to plugin-test-framework
+
+### 0.3.10 (Dec 02, 2014)
+* CB-7977 Mention `deviceready` in plugin docs
+* CB-7700 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
+* CB-7571 Bump version of nested plugin to match parent plugin
