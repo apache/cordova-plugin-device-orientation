@@ -90,7 +90,7 @@
 - (void)getHeading:(CDVInvokedUrlCommand*)command
 {
     NSString* callbackId = command.callbackId;
-    NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:nil];
+    NSDictionary* options = [command argumentAtIndex:0 withDefault:nil];
     NSNumber* filter = [options valueForKey:@"filter"];
 
     if (filter) {
@@ -126,7 +126,7 @@
 - (void)watchHeadingFilter:(CDVInvokedUrlCommand*)command
 {
     NSString* callbackId = command.callbackId;
-    NSDictionary* options = [command.arguments objectAtIndex:0 withDefault:nil];
+    NSDictionary* options = [command argumentAtIndex:0 withDefault:nil];
     NSNumber* filter = [options valueForKey:@"filter"];
     CDVHeadingData* hData = self.headingData;
 
