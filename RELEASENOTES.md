@@ -85,3 +85,6 @@
 * CB-7977 Mention `deviceready` in plugin docs
 * CB-7700 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
 * CB-7571 Bump version of nested plugin to match parent plugin
+
+### 0.3.11 (Feb 04, 2015)
+* CB-8351 ios: Use argumentForIndex rather than NSArray extension
