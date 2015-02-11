@@ -29,7 +29,6 @@ exports.defineAutoTests = function () {
         unexpectedFailure = "Forced failure: error callback should not have been called";
 
     describe('Compass (navigator.compass)', function () {
-        var hardwarefailure = false;
         beforeEach(function () {
             jasmine.Expectation.addMatchers({
                 toFailWithMessage: function () {
@@ -49,15 +48,22 @@ exports.defineAutoTests = function () {
             });
         });
 
-        it("compass.hardwarecheck is compass supported", function (done) {
-            navigator.compass.getCurrentHeading(function onSuccess() { done(); },
-                function onError(error) {
-                    if (error.code == CompassError.COMPASS_NOT_SUPPORTED) {
-                        hardwarefailure = true;
-                        expect(this).toFailWithMessage("The device does not have compass support. Any tests relying on support will be marked pending.");
-                    }
-                    done();
-                });
+        var isCompassAvailable = true;
+
+        beforeEach(function (done) {
+            if (!isCompassAvailable) {
+                // if we're already ensured that compass is not available, no need to check it again
+                done();
+                return;
+            }
+            // Try to access compass device, and if it is not available
+            // set hardwarefailure flag to mark some tests pending
+            navigator.compass.getCurrentHeading(done, function (error) {
+                if (error.code == CompassError.COMPASS_NOT_SUPPORTED) {
+                    isCompassAvailable = false;
+                }
+                done();
+            });
         });
 
         it("compass.spec.1 should exist", function () {
@@ -71,7 +77,7 @@ exports.defineAutoTests = function () {
         });
 
         it("compass.spec.3 getCurrentHeading success callback should be called with a Heading object", function (done) {
-            if (hardwarefailure) {
+            if (!isCompassAvailable) {
                 pending();
             }
             navigator.compass.getCurrentHeading(function (a) {
