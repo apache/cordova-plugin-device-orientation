@@ -1,0 +1,44 @@
+{
+  "name": "cordova-plugin-device-orientation",
+  "version": "0.3.12-dev",
+  "description": "Cordova Device Orientation Plugin",
+  "cordova": {
+    "id": "org.apache.cordova.device-orientation",
+    "platforms": [
+      "firefoxos",
+      "android",
+      "amazon-fireos",
+      "ubuntu",
+      "blackberry10",
+      "ios",
+      "wp7",
+      "wp8",
+      "windows8",
+      "tizen",
+      "browser"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git"
+  },
+  "keywords": [
+    "cordova",
+    "device",
+    "orientation",
+    "ecosystem:cordova",
+    "cordova-firefoxos",
+    "cordova-android",
+    "cordova-amazon-fireos",
+    "cordova-ubuntu",
+    "cordova-blackberry10",
+    "cordova-ios",
+    "cordova-wp7",
+    "cordova-wp8",
+    "cordova-windows8",
+    "cordova-tizen",
+    "cordova-browser"
+  ],
+  "author": "Apache Software Foundation",
+  "license": "Apache 2.0"
+}
