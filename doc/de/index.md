@@ -21,6 +21,16 @@
 
 Dieses Plugin ermöglicht den Zugriff auf das Gerät Kompass. Der Kompass ist ein Sensor, der erkennt die Richtung oder Position, dass das Gerät in der Regel von der Oberseite des Geräts gezeigt wird. Er misst die Überschrift im Grad von 0 bis 359.99, 0 wo Norden ist.
 
+Der Zugang ist über eine globale `navigator.compass`-Objekt.
+
+Obwohl das Objekt mit der globalen Gültigkeitsbereich `navigator` verbunden ist, steht es nicht bis nach dem `Deviceready`-Ereignis.
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(navigator.compass);
+    }
+    
+
 ## Installation
 
     cordova plugin add org.apache.cordova.device-orientation
@@ -46,9 +56,9 @@ Dieses Plugin ermöglicht den Zugriff auf das Gerät Kompass. Der Kompass ist ei
 
 ## navigator.compass.getCurrentHeading
 
-Erhalten Sie aktuelle Kompassrichtung. Die Kompassrichtung wird zurückgegeben, über ein `CompassHeading` -Objekt unter Verwendung der `compassSuccess` Callback-Funktion.
+Erhalten Sie aktuelle Kompassrichtung. Die Kompassrichtung wird über ein `CompassHeading`-Objekt mithilfe der `compassSuccess`-Callback-Funktion zurückgegeben.
 
-    navigator.compass.getCurrentHeading (CompassSuccess, CompassError);
+    navigator.compass.getCurrentHeading(compassSuccess, compassError);
     
 
 ### Beispiel
@@ -66,14 +76,14 @@ Erhalten Sie aktuelle Kompassrichtung. Die Kompassrichtung wird zurückgegeben, 
 
 ## navigator.compass.watchHeading
 
-Ruft das Gerät an den aktuellen Kurs in regelmäßigen Abständen. Jedes Mal, die Überschrift abgerufen wird, die `headingSuccess` Callback-Funktion wird ausgeführt.
+Ruft das Gerät an den aktuellen Kurs in regelmäßigen Abständen. Jedes Mal, wenn die Überschrift abgerufen wird, wird die Callback-Funktion `headingSuccess` ausgeführt.
 
-Die zurückgegebenen Watch-ID verweist das Kompass-Uhr-Intervall. Die Uhr, die ID kann verwendet werden, mit `navigator.compass.clearWatch` , beobachten die navigator.compass zu stoppen.
+Die zurückgegebenen Watch-ID verweist das Kompass-Uhr-Intervall. Die Uhr ID mit `navigator.compass.clearWatch` einsetzbar, um gerade die navigator.compass zu stoppen.
 
     var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
     
 
-`compassOptions`enthalten die folgenden Schlüssel:
+`compassOptions` enthalten die folgenden Schlüssel:
 
 *   **Häufigkeit**: wie oft die Kompassrichtung in Millisekunden abrufen. *(Anzahl)* (Default: 100)
 *   **Filter**: die Veränderung der Grad benötigt, um einen WatchHeading Erfolg Rückruf initiiert. Wenn dieser Wert festgelegt ist, wird die **Häufigkeit** ignoriert. *(Anzahl)*
@@ -102,7 +112,7 @@ Werte für aktuelle Überschrift werden nach dem Zufallsprinzip generiert, um de
 
 ### iOS Macken
 
-Nur ein `watchHeading` kann in der Tat auf einmal in iOS sein. Wenn ein `watchHeading` benutzt einen Filter Aufrufen von `getCurrentHeading` oder `watchHeading` verwendet den Wert des vorhandenen Filters Überschrift Änderungen festlegen. Überschrift Veränderungen beobachten, mit einem Filter ist effizienter als mit Zeitintervallen.
+Nur ein `watchHeading` kann in der Tat auf einmal in iOS sein. Wenn ein `watchHeading` einen Filter verwendet, wird durch Aufrufen von `getCurrentHeading` oder `watchHeading` den vorhandenen Filterwert Überschrift Änderungen angegeben. Überschrift Veränderungen beobachten, mit einem Filter ist effizienter als mit Zeitintervallen.
 
 ### Amazon Fire OS Macken
 
@@ -144,7 +154,7 @@ Stoppen Sie, beobachten den Kompass auf der Watch-ID-Parameter verweist.
 
 ## CompassHeading
 
-Ein `CompassHeading` Objekt wird an die `CompassSuccess` Callback-Funktion zurückgegeben.
+Ein `CompassHeading`-Objekt wird an die `compassSuccess`-Callback-Funktion zurückgegeben.
 
 ### Eigenschaften
 
@@ -182,7 +192,7 @@ Ein `CompassHeading` Objekt wird an die `CompassSuccess` Callback-Funktion zurü
 
 ## CompassError
 
-A `CompassError` Objekt wird zurückgegeben, um die `compassError` Callback-Funktion, wenn ein Fehler auftritt.
+Ein `CompassError`-Objekt wird an die `compassError`-Callback-Funktion zurückgegeben, wenn ein Fehler auftritt.
 
 ### Eigenschaften
 

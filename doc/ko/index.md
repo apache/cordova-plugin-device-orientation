@@ -21,6 +21,16 @@
 
 이 플러그인 디바이스의 나침반에 대 한 액세스를 제공합니다. 나침반 방향 또는 표제는 장치 지적 이다, 일반적으로 장치 위에서 감지 하는 센서입니다. 359.99, 0가 북쪽을 0에서도에서 머리글을 측정 합니다.
 
+글로벌 `navigator.compass` 개체를 통해 액세스가입니다.
+
+개체 `navigator` 글로벌 범위 첨부 아니에요 때까지 사용할 수 있는 `deviceready` 이벤트 후.
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(navigator.compass);
+    }
+    
+
 ## 설치
 
     cordova plugin add org.apache.cordova.device-orientation
@@ -46,9 +56,9 @@
 
 ## navigator.compass.getCurrentHeading
 
-현재 나침반 제목 좀. 나침의 표제를 통해 반환 되는 `CompassHeading` 개체를 사용 하는 `compassSuccess` 콜백 함수.
+현재 나침반 제목 좀. 나침반 제목 `compassSuccess` 콜백 함수를 사용 하 여 `CompassHeading` 개체를 통해 반환 됩니다.
 
-    navigator.compass.getCurrentHeading (compassSuccess, compassError);
+    navigator.compass.getCurrentHeading(compassSuccess, compassError);
     
 
 ### 예를 들어
@@ -66,17 +76,17 @@
 
 ## navigator.compass.watchHeading
 
-정기적 장치의 현재 머리글을 가져옵니다. 제목 검색 때마다는 `headingSuccess` 콜백 함수를 실행 합니다.
+정기적 장치의 현재 머리글을 가져옵니다. 제목 검색 때마다 `headingSuccess` 콜백 함수가 실행 됩니다.
 
-반환 된 시계 ID 나침반 시계 간격을 참조합니다. ID와 함께 사용 될 수 있습니다 시계 `navigator.compass.clearWatch` 는 navigator.compass를 보고 그만.
+반환 된 시계 ID 나침반 시계 간격을 참조합니다. 시계 ID는 navigator.compass를 보는 중지 하 `navigator.compass.clearWatch`와 함께 사용할 수 있습니다.
 
     var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
     
 
-`compassOptions`다음 키를 포함할 수 있습니다.
+`compassOptions`는 다음 키를 포함할 수 있습니다.
 
-*   **주파수**: 자주 밀리초에서 나침반 머리글을 검색 하는 방법. *(수)* (기본값: 100)
-*   **필터**:도 watchHeading 성공 콜백을 시작 하는 데 필요한 변경. 이 값을 설정 하는 경우 **주파수** 는 무시 됩니다. *(수)*
+*   **frequency**: 자주 밀리초에서 나침반 머리글을 검색 하는 방법. *(수)* (기본값: 100)
+*   **filter**:도 watchHeading 성공 콜백을 시작 하는 데 필요한 변경. 이 값을 설정 하는 경우 **주파수** 는 무시 됩니다. *(수)*
 
 ### 예를 들어
 
@@ -102,7 +112,7 @@
 
 ### iOS 단점
 
-단 하나 `watchHeading` iOS에서 한 번에 적용에서 될 수 있습니다. 경우는 `watchHeading` 필터를 사용 하 여 호출 `getCurrentHeading` 또는 `watchHeading` 기존 필터 값을 사용 하 여 제목 변화를 지정 합니다. 필터와 제목 변화를 보고 시간을 간격으로 보다 더 효율적입니다.
+하나의 `watchHeading` iOS에서 한 번에 적용에서 될 수 있습니다. `watchHeading` 필터를 사용 하는 경우 `getCurrentHeading` 또는 `watchHeading` 호출 사용 하 여 기존 필터 값 지정 제목 변경. 필터와 제목 변화를 보고 시간을 간격으로 보다 더 효율적입니다.
 
 ### 아마존 화재 OS 단점
 
@@ -144,7 +154,7 @@
 
 ## CompassHeading
 
-A `CompassHeading` 개체에 반환 되는 `compassSuccess` 콜백 함수.
+`CompassHeading` 개체는 `compassSuccess` 콜백 함수에 반환 됩니다.
 
 ### 속성
 
@@ -182,7 +192,7 @@ A `CompassHeading` 개체에 반환 되는 `compassSuccess` 콜백 함수.
 
 ## CompassError
 
-A `CompassError` 개체에 반환 됩니다는 `compassError` 콜백 함수 오류가 발생 합니다.
+`CompassError` 개체는 오류가 발생 하면 `compassError` 콜백 함수에 반환 됩니다.
 
 ### 속성
 

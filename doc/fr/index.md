@@ -21,9 +21,17 @@
 
 Ce plugin permet d'accéder à la boussole de l'appareil. La boussole est un capteur qui détecte la direction ou la position que l'appareil est pointé, généralement par le haut de l'appareil. Il mesure la position en degrés de 0 à 359.99, où 0 est vers le Nord.
 
+Accès se fait par un global `navigator.compass` objet.
+
+Bien que l'objet est attaché à la portée globale `navigator` , il n'est pas disponible jusqu'après la `deviceready` événement.
+
+    document.addEventListener (« deviceready », onDeviceReady, false) ;
+    function onDeviceReady() {console.log(navigator.compass);}
+    
+
 ## Installation
 
-    cordova plugin add org.apache.cordova.device-orientation
+    Cordova plugin ajouter org.apache.cordova.device-orientation
     
 
 ## Plates-formes prises en charge
@@ -53,15 +61,11 @@ Téléchargez la cours de la boussole. La boussole est renvoyé via un `CompassH
 
 ### Exemple
 
-    function onSuccess(heading) {
-        alert('Heading: ' + heading.magneticHeading);
-    };
+    function onSuccess(heading) {alert (' intitulé: "+ heading.magneticHeading);} ;
     
-    function onError(error) {
-        alert('CompassError: ' + error.code);
-    };
+    function onError(error) {alert ('CompassError: ' + error.code);} ;
     
-    navigator.compass.getCurrentHeading(onSuccess, onError);
+    navigator.compass.getCurrentHeading (onSuccess, onError) ;
     
 
 ## navigator.compass.watchHeading
@@ -70,7 +74,7 @@ Obtient la position actuelle de l'appareil à intervalle régulier. Chaque fois 
 
 Le code retourné montre fait référence à l'intervalle montre boussole. La montre ID peut être utilisé avec `navigator.compass.clearWatch` d'arrêter de regarder le navigator.compass.
 
-    var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
+    var watchID = navigator.compass.watchHeading (compassSuccess, compassError, [compassOptions]) ;
     
 
 `compassOptions`peut contenir les clés suivantes :
@@ -80,20 +84,15 @@ Le code retourné montre fait référence à l'intervalle montre boussole. La mo
 
 ### Exemple
 
-    function onSuccess(heading) {
-        var element = document.getElementById('heading');
-        element.innerHTML = 'Heading: ' + heading.magneticHeading;
+    function onSuccess(heading) {var element = document.getElementById('heading') ;
+        element.innerHTML = "intitulé:" + heading.magneticHeading ;
     };
     
-    function onError(compassError) {
-        alert('Compass error: ' + compassError.code);
-    };
+    function onError(compassError) {alert (' erreur de boussole: "+ compassError.code);} ;
     
-    var options = {
+    options de var = {
         frequency: 3000
-    }; // Update every 3 seconds
-    
-    var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    } ; Mise à jour chaque 3 secondes var watchID = navigator.compass.watchHeading (onSuccess, onError, options) ;
     
 
 ### Bizarreries navigateur
@@ -135,11 +134,9 @@ Arrêter de regarder la boussole référencée par le paramètre ID de montre.
 
 ### Exemple
 
-    var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    var watchID = navigator.compass.watchHeading (onSuccess, onError, options) ;
     
-    // ... later on ...
-    
-    navigator.compass.clearWatch(watchID);
+    ... plus tard... navigator.compass.clearWatch(watchID) ;
     
 
 ## CompassHeading

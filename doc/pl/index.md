@@ -21,6 +21,16 @@
 
 Ten plugin umożliwia dostęp do urządzenia kompas. Kompas jest czujnik, który wykrywa kierunek lub pozycji, że urządzenie jest wskazywany, zazwyczaj z górnej części urządzenia. Mierzy on nagłówek w stopniach od 0 do 359.99, gdzie 0 jest północ.
 
+Dostęp odbywa się za pomocą obiektu globalnego `navigator.compass`.
+
+Mimo, że obiekt jest dołączony do globalnego zakresu `navigator`, to nie dostępne dopiero po zdarzeniu `deviceready`.
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(navigator.compass);
+    }
+    
+
 ## Instalacja
 
     cordova plugin add org.apache.cordova.device-orientation
@@ -46,9 +56,9 @@ Ten plugin umożliwia dostęp do urządzenia kompas. Kompas jest czujnik, który
 
 ## navigator.compass.getCurrentHeading
 
-Uzyskać bieżącej pozycji kompas. Kompas pozycji jest zwracana za pośrednictwem `CompassHeading` obiektu przy użyciu `compassSuccess` funkcji wywołania zwrotnego.
+Uzyskać bieżącej pozycji kompas. Kompas pozycji jest zwracana za pośrednictwem obiektu `CompassHeading` za pomocą funkcji wywołania zwrotnego `compassSuccess`.
 
-    navigator.compass.getCurrentHeading (compassSuccess, compassError);
+    navigator.compass.getCurrentHeading(compassSuccess, compassError);
     
 
 ### Przykład
@@ -66,14 +76,14 @@ Uzyskać bieżącej pozycji kompas. Kompas pozycji jest zwracana za pośrednictw
 
 ## navigator.compass.watchHeading
 
-Pobiera bieżący nagłówek urządzenia w regularnych odstępach czasu. Za każdym razem jest źródło nagłówka, `headingSuccess` funkcja wywołania zwrotnego jest wykonywany.
+Pobiera bieżący nagłówek urządzenia w regularnych odstępach czasu. Każdym razem, gdy nagłówek jest źródło, funkcja wywołania zwrotnego `headingSuccess` jest wykonywany.
 
-Identyfikator zwrócony zegarek odwołuje interwał kompas zegarek. Oglądaj identyfikator może być używany z `navigator.compass.clearWatch` Aby przestać oglądać navigator.compass.
+Identyfikator zwrócony zegarek odwołuje interwał kompas zegarek. Oglądaj identyfikator może być używany z `navigator.compass.clearWatch`, aby przestać oglądać navigator.compass.
 
     var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
     
 
-`compassOptions`może zawierać następujące klucze:
+`compassOptions` może zawierać następujące klucze:
 
 *   **częstotliwość**: jak często pobrać kompas pozycji w milisekundach. *(Liczba)* (Domyślnie: 100)
 *   **Filtr**: zmiana stopni wymagane zainicjować wywołania zwrotnego watchHeading sukces. Gdy ta wartość jest ustawiona, **częstotliwość** jest ignorowana. *(Liczba)*
@@ -102,7 +112,7 @@ Wartości dla bieżącej pozycji są losowo generowane w celu symulacji kompas.
 
 ### Dziwactwa iOS
 
-Tylko jeden `watchHeading` może być efekt w tym samym czasie w iOS. Jeśli `watchHeading` używa filtru, wywołanie `getCurrentHeading` lub `watchHeading` używa istniejących wartości filtru określić zmiany pozycji. Obserwując zmiany pozycji z filtrem jest bardziej efektywne niż z odstępach czasu.
+Tylko jeden `watchHeading` może być efekt w tym samym czasie w iOS. Jeśli `watchHeading` używa filtru, `getCurrentHeading` lub `watchHeading` używa istniejących wartości filtru określić zmiany pozycji. Obserwując zmiany pozycji z filtrem jest bardziej efektywne niż z odstępach czasu.
 
 ### Amazon ogień OS dziwactwa
 
@@ -126,7 +136,7 @@ Tylko jeden `watchHeading` może być efekt w tym samym czasie w iOS. Jeśli `wa
 
 ## navigator.compass.clearWatch
 
-Zatrzymuje obserwowanie kompasu określonego przez parametr watchID.
+Przestać oglądać określany przez parametr ID Zegarek kompas.
 
     navigator.compass.clearWatch(watchID);
     
@@ -144,7 +154,7 @@ Zatrzymuje obserwowanie kompasu określonego przez parametr watchID.
 
 ## CompassHeading
 
-A `CompassHeading` obiekt jest zwracany do `compassSuccess` funkcji wywołania zwrotnego.
+Obiekt `CompassHeading` jest zwracany do funkcji wywołania zwrotnego `compassSuccess`.
 
 ### Właściwości
 
@@ -182,7 +192,7 @@ A `CompassHeading` obiekt jest zwracany do `compassSuccess` funkcji wywołania z
 
 ## CompassError
 
-A `CompassError` obiekt jest zwracany do `compassError` funkcji wywołania zwrotnego, gdy wystąpi błąd.
+Gdy wystąpi błąd, funkcja wywołania zwrotnego `compassError` zwracany jest obiekt `CompassError`.
 
 ### Właściwości
 

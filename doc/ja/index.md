@@ -21,6 +21,16 @@
 
 このプラグインは、デバイスのコンパスへのアクセスを提供します。 コンパスは方向またはというデバイスは、通常から指摘装置の上部の見出しを検出するセンサーです。 359.99、0 は北に 0 からの角度で見出しを測定します。
 
+アクセスは、グローバル `navigator.compass` オブジェクトを介して。
+
+オブジェクトは、グローバル スコープの `ナビゲーター` に添付、それがないまで `deviceready` イベントの後。
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(navigator.compass);
+    }
+    
+
 ## インストール
 
     cordova plugin add org.apache.cordova.device-orientation
@@ -46,9 +56,9 @@
 
 ## navigator.compass.getCurrentHeading
 
-現在のコンパス方位を取得します。コンパス針路経由で返されます、 `CompassHeading` オブジェクトを使用して、 `compassSuccess` コールバック関数。
+現在のコンパス方位を取得します。コンパス針路が `compassSuccess` コールバック関数を使用して `CompassHeading` オブジェクトを介して返されます。
 
-    navigator.compass.getCurrentHeading compassSuccess （compassError）;
+    navigator.compass.getCurrentHeading(compassSuccess, compassError);
     
 
 ### 例
@@ -66,14 +76,14 @@
 
 ## navigator.compass.watchHeading
 
-デバイスの定期的な間隔で現在の方位を取得します。見出しを取り出すたびに、 `headingSuccess` コールバック関数が実行されます。
+デバイスの定期的な間隔で現在の方位を取得します。見出しを取り出すたびに `headingSuccess` コールバック関数が実行されます。
 
-返される時計 ID コンパス時計腕時計間隔を参照します。時計を持つ ID を使用することができます `navigator.compass.clearWatch` 、navigator.compass を見て停止します。
+返される時計 ID コンパス時計腕時計間隔を参照します。時計 ID は、navigator.compass を見て停止する `navigator.compass.clearWatch` を使用できます。
 
     var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
     
 
-`compassOptions`次のキーを含めることができます。
+`compassOptions` は、次のキーを含めることができます。
 
 *   **周波数**: 多くの場合、コンパス針路 (ミリ秒単位) を取得する方法。*(数)*(デフォルト: 100)
 *   **フィルター**: watchHeading 成功時のコールバックを開始する必要度の変化。この値を設定すると、**頻度**は無視されます。*(数)*
@@ -102,7 +112,7 @@
 
 ### iOS の癖
 
-1 つだけ `watchHeading` iOS で一度に有効にすることができます。 場合は、 `watchHeading` 、フィルターを使用して呼び出す `getCurrentHeading` または `watchHeading` 既存のフィルターの値を使用して見出しの変更を指定します。 フィルターを使用して見出しの変更を見て時間間隔よりも効率的にファイルです。
+1 つだけ `watchHeading` は iOS の効果を同時にすることができます。 `watchHeading` はフィルターを使用して、`getCurrentHeading` または `watchHeading` を呼び出す見出しの変更を指定する既存のフィルター値を使用します。 フィルターを使用して見出しの変更を見て時間間隔よりも効率的にファイルです。
 
 ### アマゾン火 OS 癖
 
@@ -144,7 +154,7 @@
 
 ## CompassHeading
 
-A `CompassHeading` オブジェクトに返される、 `compassSuccess` コールバック関数。
+`CompassHeading` オブジェクトは、`compassSuccess` コールバック関数に返されます。
 
 ### プロパティ
 
@@ -182,7 +192,7 @@ A `CompassHeading` オブジェクトに返される、 `compassSuccess` コー�
 
 ## CompassError
 
-A `CompassError` オブジェクトに返される、 `compassError` コールバック関数でエラーが発生したとき。
+`CompassError` オブジェクトにエラーが発生したときに `compassError` コールバック関数に返されます。
 
 ### プロパティ
 

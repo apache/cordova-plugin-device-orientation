@@ -21,6 +21,16 @@
 
 這個外掛程式提供了對設備的指南針的訪問。 羅盤是感應器，可檢測的方向或設備通常指從設備的頂部的標題。 它的措施中從 0 度到 359.99，其中 0 是北部的標題。
 
+訪問是通過一個全球 `navigator.compass` 物件。
+
+雖然該物件附加到全球範圍內 `導航器`，它不可用直到 `deviceready` 事件之後。
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(navigator.compass);
+    }
+    
+
 ## 安裝
 
     cordova plugin add org.apache.cordova.device-orientation
@@ -46,9 +56,9 @@
 
 ## navigator.compass.getCurrentHeading
 
-獲取當前的羅經航向。羅經航向返回通過 `CompassHeading` 物件使用 `compassSuccess` 回呼函數。
+獲取當前的羅經航向。羅經航向被經由一個 `CompassHeading` 物件，使用 `compassSuccess` 回呼函數。
 
-    navigator.compass.getCurrentHeading compassError compassSuccess） ；
+    navigator.compass.getCurrentHeading(compassSuccess, compassError);
     
 
 ### 示例
@@ -66,17 +76,17 @@
 
 ## navigator.compass.watchHeading
 
-獲取設備的當前標題在固定的時間間隔。檢索標題時，每次 `headingSuccess` 執行回呼函數。
+獲取設備的當前標題的間隔時間定期。檢索到的標題，每次執行 `headingSuccess` 回呼函數。
 
-返回的表 ID 引用指南針手錶的時間間隔。可以使用 ID 與手錶 `navigator.compass.clearWatch` 停止了觀看 navigator.compass。
+返回的表 ID 引用的指南針手錶的時間間隔。表 ID 可用於與 `navigator.compass.clearWatch` 停止看 navigator.compass。
 
     var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
     
 
-`compassOptions`可能包含以下鍵：
+`compassOptions` 可能包含以下項：
 
-*   **頻率**： 經常如何檢索以毫秒為單位的羅經航向。*（人數）*（預設值： 100）
-*   **篩選器**： 啟動 watchHeading 成功回檔所需的度的變化。當設置此值時，**頻率**將被忽略。*（人數）*
+*   **frequency**： 經常如何檢索以毫秒為單位的羅經航向。*（Number）*（預設值： 100）
+*   **filter**： 啟動 watchHeading 成功回檔所需的度的變化。當設置此值時，**frequency**將被忽略。*（Number）*
 
 ### 示例
 
@@ -102,7 +112,7 @@
 
 ### iOS 的怪癖
 
-只有一個 `watchHeading` 可以在 iOS 中一次的效果。 如果 `watchHeading` 使用篩選器中，調用 `getCurrentHeading` 或 `watchHeading` 使用現有的篩選器值來指定標題的變化。 帶有篩選器看標題的變化是與時間間隔比效率更高。
+只有一個 `watchHeading` 可以在 iOS 中一次的效果。 如果 `watchHeading` 使用一個篩選器，致電 `getCurrentHeading` 或 `watchHeading` 使用現有的篩選器值來指定標題的變化。 帶有篩選器看標題的變化是與時間間隔比效率更高。
 
 ### 亞馬遜火 OS 怪癖
 
@@ -128,7 +138,7 @@
 
 別看手錶 ID 參數所引用的指南針。
 
-    navigator.compass.clearWatch(watchID) ；
+    navigator.compass.clearWatch(watchID);
     
 
 *   **watchID**： 由返回的 ID`navigator.compass.watchHeading`.
@@ -144,7 +154,7 @@
 
 ## CompassHeading
 
-A `CompassHeading` 物件返回到 `compassSuccess` 回呼函數。
+`CompassSuccess` 回呼函數返回一個 `CompassHeading` 物件。
 
 ### 屬性
 
@@ -154,7 +164,7 @@ A `CompassHeading` 物件返回到 `compassSuccess` 回呼函數。
 
 *   **headingAccuracy**： 中度報告的標題和真正標題之間的偏差。*（人數）*
 
-*   **時間戳記**： 本項決定在其中的時間。*（毫秒）*
+*   **timestamp**： 本項決定在其中的時間。*（毫秒）*
 
 ### 亞馬遜火 OS 怪癖
 
@@ -182,11 +192,11 @@ A `CompassHeading` 物件返回到 `compassSuccess` 回呼函數。
 
 ## CompassError
 
-A `CompassError` 物件返回到 `compassError` 時出現錯誤的回呼函數。
+當發生錯誤時，`compassError` 回呼函數情況下會返回一個 `CompassError` 物件。
 
 ### 屬性
 
-*   **代碼**： 下面列出的預定義的錯誤代碼之一。
+*   **code**： 下面列出的預定義的錯誤代碼之一。
 
 ### 常量
 

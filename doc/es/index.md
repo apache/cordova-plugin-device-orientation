@@ -21,9 +21,17 @@
 
 Este plugin proporciona acceso al compás del dispositivo. La brújula es un sensor que detecta la dirección o rumbo que el dispositivo está apuntado, normalmente desde la parte superior del dispositivo. Mide el rumbo en grados de 0 a 359.99, donde 0 es el norte.
 
+El acceso es por un global `navigator.compass` objeto.
+
+Aunque el objeto está unido al ámbito global `navigator` , no estará disponible hasta después de la `deviceready` evento.
+
+    document.addEventListener ("deviceready", onDeviceReady, false);
+    function onDeviceReady() {console.log(navigator.compass)};
+    
+
 ## Instalación
 
-    cordova plugin add org.apache.cordova.device-orientation
+    Cordova plugin añade org.apache.cordova.device-orientación
     
 
 ## Plataformas soportadas
@@ -46,31 +54,27 @@ Este plugin proporciona acceso al compás del dispositivo. La brújula es un sen
 
 ## navigator.compass.getCurrentHeading
 
-Conseguir el actual rumbo de la brújula. El rumbo de la brújula es devuelto por un `CompassHeading` objeto usando el `compassSuccess` función callback.
+Conseguir el actual rumbo de la brújula. El rumbo de la brújula es devuelto vía un `CompassHeading` objeto usando la `compassSuccess` función de callback.
 
     navigator.compass.getCurrentHeading (compassSuccess, compassError);
     
 
 ### Ejemplo
 
-    function onSuccess(heading) {
-        alert('Heading: ' + heading.magneticHeading);
-    };
+    function onSuccess(heading) {alert (' dirige: ' + heading.magneticHeading);};
     
-    function onError(error) {
-        alert('CompassError: ' + error.code);
-    };
+    function onError(error) {alert ('CompassError: "+ error.code);};
     
-    navigator.compass.getCurrentHeading(onSuccess, onError);
+    navigator.compass.getCurrentHeading (onSuccess, onError);
     
 
 ## navigator.compass.watchHeading
 
-Obtiene el título actual del dispositivo a intervalos regulares. Cada vez que se recupera el título, el `headingSuccess` función de devolución de llamada se ejecuta.
+Obtiene el título actual del dispositivo a intervalos regulares. Cada vez que se recupera el título, el `headingSuccess` se ejecuta la función callback.
 
-El identificador devuelto reloj hace referencia al intervalo de reloj brújula. El reloj ID puede utilizarse con `navigator.compass.clearWatch` dejar de ver la navigator.compass.
+El identificador devuelto reloj referencias el intervalo reloj brújula. El reloj ID puede utilizarse con `navigator.compass.clearWatch` para dejar de ver la navigator.compass.
 
-    var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
+    var watchID = navigator.compass.watchHeading (compassSuccess, compassError, [compassOptions]);
     
 
 `compassOptions`puede contener las siguientes claves:
@@ -80,20 +84,15 @@ El identificador devuelto reloj hace referencia al intervalo de reloj brújula. 
 
 ### Ejemplo
 
-    function onSuccess(heading) {
-        var element = document.getElementById('heading');
-        element.innerHTML = 'Heading: ' + heading.magneticHeading;
+    function onSuccess(heading) {var elemento = document.getElementById('heading');
+        element.innerHTML = ' Dirección: "+ heading.magneticHeading;
     };
     
-    function onError(compassError) {
-        alert('Compass error: ' + compassError.code);
-    };
+    function onError(compassError) {alert (' error del compás: ' + compassError.code);};
     
-    var options = {
+    var opciones = {
         frequency: 3000
-    }; // Update every 3 seconds
-    
-    var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    }; Actualizar cada 3 segundos var watchID = navigator.compass.watchHeading (onSuccess, onError, opciones);
     
 
 ### Navegador rarezas
@@ -102,7 +101,7 @@ Los valores de partida actual son generados al azar para simular la brújula.
 
 ### iOS rarezas
 
-Sólo un `watchHeading` puede ser en efecto a la vez en iOS. Si un `watchHeading` utiliza un filtro, llamando al `getCurrentHeading` o `watchHeading` utiliza el valor existente de filtro para especificar los cambios de rumbo. Observando los cambios de rumbo con un filtro es más eficiente que con intervalos de tiempo.
+Solamente un `watchHeading` puede ser en efecto a la vez en iOS. Si un `watchHeading` utiliza un filtro, llamando a `getCurrentHeading` o `watchHeading` utiliza el valor existente del filtro para especificar los cambios de rumbo. Observando los cambios de rumbo con un filtro es más eficiente que con intervalos de tiempo.
 
 ### Amazon fuego OS rarezas
 
@@ -135,11 +134,9 @@ Deja de mirar la brújula al que hace referencia el parámetro ID de reloj.
 
 ### Ejemplo
 
-    var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    var watchID = navigator.compass.watchHeading (onSuccess, onError, opciones);
     
-    // ... later on ...
-    
-    navigator.compass.clearWatch(watchID);
+    ... adelante... navigator.compass.clearWatch(watchID);
     
 
 ## CompassHeading

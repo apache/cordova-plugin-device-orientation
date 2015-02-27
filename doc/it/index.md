@@ -21,6 +21,16 @@
 
 Questo plugin consente di accedere alla bussola del dispositivo. La bussola è un sensore che rileva la direzione o la voce che il dispositivo è puntato, in genere dalla parte superiore del dispositivo. Esso misura la rotta in gradi da 0 a 359.99, dove 0 è a nord.
 
+L'accesso avviene tramite un oggetto globale `navigator.compass`.
+
+Anche se l'oggetto è associato con ambito globale del `navigator`, non è disponibile fino a dopo l'evento `deviceready`.
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        console.log(navigator.compass);
+    }
+    
+
 ## Installazione
 
     cordova plugin add org.apache.cordova.device-orientation
@@ -46,9 +56,9 @@ Questo plugin consente di accedere alla bussola del dispositivo. La bussola è u
 
 ## navigator.compass.getCurrentHeading
 
-Ottenere la corrente della bussola. La bussola viene restituita tramite una `CompassHeading` oggetto utilizzando il `compassSuccess` funzione di callback.
+Ottenere la corrente della bussola. La bussola viene restituita tramite un oggetto `CompassHeading` utilizzando la funzione di callback `compassSuccess`.
 
-    navigator.compass.getCurrentHeading (compassSuccess, compassError);
+    navigator.compass.getCurrentHeading(compassSuccess, compassError);
     
 
 ### Esempio
@@ -66,17 +76,17 @@ Ottenere la corrente della bussola. La bussola viene restituita tramite una `Com
 
 ## navigator.compass.watchHeading
 
-Ottiene il titolo attuale del dispositivo a intervalli regolari. Ogni volta che viene recuperato il titolo, il `headingSuccess` viene eseguita la funzione di callback.
+Ottiene il titolo attuale del dispositivo a intervalli regolari. Ogni volta che viene recuperato il titolo, viene eseguita la funzione di callback `headingSuccess`.
 
-L'orologio restituito ID fa riferimento l'intervallo orologio bussola. L'orologio ID può essere usato con `navigator.compass.clearWatch` a smettere di guardare la navigator.compass.
+L'orologio restituito ID fa riferimento l'intervallo orologio bussola. L'ID di orologio utilizzabile con `navigator.compass.clearWatch` a smettere di guardare la navigator.compass.
 
     var watchID = navigator.compass.watchHeading(compassSuccess, compassError, [compassOptions]);
     
 
-`compassOptions`può contenere i seguenti tasti:
+`compassOptions` può contenere i seguenti tasti:
 
-*   **frequenza**: la frequenza di recuperare la bussola in millisecondi. *(Numero)* (Default: 100)
-*   **filtro**: il cambiamento in gradi necessari per avviare un callback di successo watchHeading. Quando questo valore è impostato, la **frequenza** viene ignorata. *(Numero)*
+*   **frequency**: la frequenza di recuperare la bussola in millisecondi. *(Numero)* (Default: 100)
+*   **filter**: il cambiamento in gradi necessari per avviare un callback di successo watchHeading. Quando questo valore è impostato, la **frequency** viene ignorata. *(Numero)*
 
 ### Esempio
 
@@ -102,7 +112,7 @@ I valori per la rubrica attuale sono generati casualmente al fine di simulare la
 
 ### iOS stranezze
 
-Solo un `watchHeading` può essere in effetti una volta in iOS. Se un `watchHeading` utilizza un filtro, chiamata `getCurrentHeading` o `watchHeading` utilizza il valore esistente di filtro per specificare le modifiche intestazione. Guardando i cambiamenti di direzione con un filtro è più efficiente con intervalli di tempo.
+Solo un `watchHeading` può essere in effetti una volta in iOS. Se un `watchHeading` utilizza un filtro, chiamata `getCurrentHeading` o `watchHeading` utilizza il valore di filtro esistenti per specificare le modifiche intestazione. Guardando i cambiamenti di direzione con un filtro è più efficiente con intervalli di tempo.
 
 ### Amazon fuoco OS stranezze
 
@@ -144,7 +154,7 @@ Smettere di guardare la bussola a cui fa riferimento il parametro ID orologio.
 
 ## CompassHeading
 
-A `CompassHeading` oggetto viene restituito alla `compassSuccess` funzione di callback.
+Alla funzione di callback `compassSuccess` viene restituito un oggetto `CompassHeading`.
 
 ### Proprietà
 
@@ -182,7 +192,7 @@ A `CompassHeading` oggetto viene restituito alla `compassSuccess` funzione di ca
 
 ## CompassError
 
-A `CompassError` oggetto viene restituito alla `compassError` funzione di callback quando si verifica un errore.
+Un oggetto `CompassError` viene restituito alla funzione di callback `compassError` quando si verifica un errore.
 
 ### Proprietà
 
