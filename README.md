@@ -19,4 +19,6 @@
 
 # org.apache.cordova.device-orientation
 
+[![Build Status](https://travis-ci.org/apache/cordova-plugin-device-orientation.svg)](https://travis-ci.org/apache/cordova-plugin-device-orientation)
+
 Plugin documentation: [doc/index.md](doc/index.md)
