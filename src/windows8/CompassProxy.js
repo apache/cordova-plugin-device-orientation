@@ -37,30 +37,13 @@ module.exports = {
                 lose(CompassError.COMPASS_NOT_SUPPORTED);
             }, 0);
         } else {
-
-            deviceCompass.reportInterval = Math.max(16, deviceCompass.minimumReportInterval);
-
-            this.onReadingChanged = function (e) {
-                var reading = e.reading,
-                    heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth, null, reading.timestamp.getTime());
-                win(heading);
-            };
-            deviceCompass.addEventListener("readingchanged", this.onReadingChanged);
+            var reading = deviceCompass.getCurrentReading(),
+                heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth, null, reading.timestamp.getTime());
+            win(heading);
         }
     },
     stopHeading: function (win, lose) {
-        var deviceCompass = Windows.Devices.Sensors.Compass.getDefault();
-        if (!deviceCompass) {
-            setTimeout(function () {
-                lose(CompassError.COMPASS_NOT_SUPPORTED);
-            }, 0);
-        } else {
-            deviceCompass.removeEventListener("readingchanged", this.onReadingChanged);
-            this.onReadingChanged = null;
-            deviceCompass.reportInterval = 0;
-            win();
-        }
-
+        win();
     }
 };
 
