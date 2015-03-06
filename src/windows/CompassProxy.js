@@ -39,11 +39,15 @@ module.exports = {
         } else {
             var reading = deviceCompass.getCurrentReading(),
                 heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth, null, reading.timestamp.getTime());
-            win(heading);
+            setTimeout(function () {
+                win(heading);
+            }, 0);
         }
     },
     stopHeading: function (win, lose) {
-        win();
+        setTimeout(function () {
+            win();
+        }, 0);
     }
 };
 
