@@ -175,8 +175,6 @@ A `CompassHeading` objet est retourné à la `compassSuccess` fonction de rappel
 
 *   La `trueHeading` propriété est retournée uniquement pour les services de localisation activées via`navigator.geolocation.watchLocation()`.
 
-*   Pour les appareils iOS 4 et au-dessus, rubrique facteurs dans l'orientation actuelle de l'appareil et ne fait pas référence à sa position absolue, pour les applications prenant en charge cette orientation.
-
 ## CompassError
 
 A `CompassError` objet est retourné à la `compassError` fonction de rappel lorsqu'une erreur survient.

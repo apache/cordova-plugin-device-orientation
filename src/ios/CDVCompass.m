@@ -200,11 +200,9 @@
     }
 }
 
-// helper method to check the orientation and start updating headings
+// helper method to start updating headings
 - (void)startHeadingWithFilter:(CLLocationDegrees)filter
 {
-    // FYI UIDeviceOrientation and CLDeviceOrientation enums are currently the same
-    self.locationManager.headingOrientation = (CLDeviceOrientation)self.viewController.interfaceOrientation;
     self.locationManager.headingFilter = filter;
     [self.locationManager startUpdatingHeading];
     self.headingData.headingStatus = HEADINGSTARTING;
