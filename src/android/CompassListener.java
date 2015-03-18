@@ -53,7 +53,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     public static int ERROR_FAILED_TO_START = 3;
 
     public long TIMEOUT = 30000;        // Timeout in msec to shut off listener
-    private static final int DECLINATION_CHECK_INTERVAL = 30 * 60 * 1000; 
+    private static final int DECLINATION_CHECK_INTERVAL = 30 * 60 * 1000;
 
     int status;                         // status of listener
     float heading;                      // most recent heading value
@@ -318,10 +318,9 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
         return obj;
     }
 
-    /*
-     * Check whether a fresher location is available and update the GeomagneticField
-     * that we use for correcting the magnetic heading. If the location is stale,
-     * use it anyway but log a warning.
+    /**
+     * Check for magnetic declination using the locationManager and geomagneticField
+     * 
      */
     private void updateDeclination()
     {
