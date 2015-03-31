@@ -17,7 +17,7 @@
     under the License.
 -->
 
-# org.apache.cordova.device-orientation
+# cordova-plugin-device-orientation
 
 이 플러그인 디바이스의 나침반에 대 한 액세스를 제공합니다. 나침반 방향 또는 표제는 장치 지적 이다, 일반적으로 장치 위에서 감지 하는 센서입니다. 359.99, 0가 북쪽을 0에서도에서 머리글을 측정 합니다.
 
@@ -33,7 +33,7 @@
 
 ## 설치
 
-    cordova plugin add org.apache.cordova.device-orientation
+    cordova plugin add cordova-plugin-device-orientation
     
 
 ## 지원 되는 플랫폼

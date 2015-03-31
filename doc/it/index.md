@@ -17,7 +17,7 @@
     under the License.
 -->
 
-# org.apache.cordova.device-orientation
+# cordova-plugin-device-orientation
 
 Questo plugin consente di accedere alla bussola del dispositivo. La bussola è un sensore che rileva la direzione o la voce che il dispositivo è puntato, in genere dalla parte superiore del dispositivo. Esso misura la rotta in gradi da 0 a 359.99, dove 0 è a nord.
 
@@ -33,7 +33,7 @@ Anche se l'oggetto è associato con ambito globale del `navigator`, non è dispo
 
 ## Installazione
 
-    cordova plugin add org.apache.cordova.device-orientation
+    cordova plugin add cordova-plugin-device-orientation
     
 
 ## Piattaforme supportate

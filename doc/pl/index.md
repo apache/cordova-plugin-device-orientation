@@ -17,7 +17,7 @@
     under the License.
 -->
 
-# org.apache.cordova.device-orientation
+# cordova-plugin-device-orientation
 
 Ten plugin umożliwia dostęp do urządzenia kompas. Kompas jest czujnik, który wykrywa kierunek lub pozycji, że urządzenie jest wskazywany, zazwyczaj z górnej części urządzenia. Mierzy on nagłówek w stopniach od 0 do 359.99, gdzie 0 jest północ.
 
@@ -33,7 +33,7 @@ Mimo, że obiekt jest dołączony do globalnego zakresu `navigator`, to nie dost
 
 ## Instalacja
 
-    cordova plugin add org.apache.cordova.device-orientation
+    cordova plugin add cordova-plugin-device-orientation
     
 
 ## Obsługiwane platformy

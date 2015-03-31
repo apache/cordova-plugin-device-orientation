@@ -17,13 +17,13 @@
     under the License.
 -->
 
-# org.apache.cordova.device-orientation
+# cordova-plugin-device-orientation
 
 Этот плагин обеспечивает доступ к устройства компас. Компас-это датчик, который определяет направление или заголовок, что устройство указывает, как правило в верхней части устройства. Он измеряет направление в градусах от 0 до 359,99 градусов, где 0 — север.
 
 ## Установка
 
-    cordova plugin add org.apache.cordova.device-orientation
+    cordova plugin add cordova-plugin-device-orientation
     
 
 ## Поддерживаемые платформы

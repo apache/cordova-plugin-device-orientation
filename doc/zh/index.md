@@ -17,7 +17,7 @@
     under the License.
 -->
 
-# org.apache.cordova.device-orientation
+# cordova-plugin-device-orientation
 
 這個外掛程式提供了對設備的指南針的訪問。 羅盤是感應器，可檢測的方向或設備通常指從設備的頂部的標題。 它的措施中從 0 度到 359.99，其中 0 是北部的標題。
 
@@ -33,7 +33,7 @@
 
 ## 安裝
 
-    cordova plugin add org.apache.cordova.device-orientation
+    cordova plugin add cordova-plugin-device-orientation
     
 
 ## 支援的平臺

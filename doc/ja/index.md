@@ -17,7 +17,7 @@
     under the License.
 -->
 
-# org.apache.cordova.device-orientation
+# cordova-plugin-device-orientation
 
 このプラグインは、デバイスのコンパスへのアクセスを提供します。 コンパスは方向またはというデバイスは、通常から指摘装置の上部の見出しを検出するセンサーです。 359.99、0 は北に 0 からの角度で見出しを測定します。
 
@@ -33,7 +33,7 @@
 
 ## インストール
 
-    cordova plugin add org.apache.cordova.device-orientation
+    cordova plugin add cordova-plugin-device-orientation
     
 
 ## サポートされているプラットフォーム

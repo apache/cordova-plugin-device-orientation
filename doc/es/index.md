@@ -17,7 +17,7 @@
     under the License.
 -->
 
-# org.apache.cordova.device-orientation
+# cordova-plugin-device-orientation
 
 Este plugin proporciona acceso al compás del dispositivo. La brújula es un sensor que detecta la dirección o rumbo que el dispositivo está apuntado, normalmente desde la parte superior del dispositivo. Mide el rumbo en grados de 0 a 359.99, donde 0 es el norte.
 
@@ -31,7 +31,7 @@ Aunque el objeto está unido al ámbito global `navigator` , no estará disponib
 
 ## Instalación
 
-    Cordova plugin añade org.apache.cordova.device-orientación
+    Cordova plugin añade cordova-plugin-device-orientación
     
 
 ## Plataformas soportadas

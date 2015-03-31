@@ -17,7 +17,7 @@
     under the License.
 -->
 
-# org.apache.cordova.device-orientation
+# cordova-plugin-device-orientation
 
 Ce plugin permet d'accéder à la boussole de l'appareil. La boussole est un capteur qui détecte la direction ou la position que l'appareil est pointé, généralement par le haut de l'appareil. Il mesure la position en degrés de 0 à 359.99, où 0 est vers le Nord.
 
@@ -31,7 +31,7 @@ Bien que l'objet est attaché à la portée globale `navigator` , il n'est pas d
 
 ## Installation
 
-    Cordova plugin ajouter org.apache.cordova.device-orientation
+    Cordova plugin ajouter cordova-plugin-device-orientation
     
 
 ## Plates-formes prises en charge

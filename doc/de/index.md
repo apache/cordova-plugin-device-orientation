@@ -17,7 +17,7 @@
     under the License.
 -->
 
-# org.apache.cordova.device-orientation
+# cordova-plugin-device-orientation
 
 Dieses Plugin ermöglicht den Zugriff auf das Gerät Kompass. Der Kompass ist ein Sensor, der erkennt die Richtung oder Position, dass das Gerät in der Regel von der Oberseite des Geräts gezeigt wird. Er misst die Überschrift im Grad von 0 bis 359.99, 0 wo Norden ist.
 
@@ -33,7 +33,7 @@ Obwohl das Objekt mit der globalen Gültigkeitsbereich `navigator` verbunden ist
 
 ## Installation
 
-    cordova plugin add org.apache.cordova.device-orientation
+    cordova plugin add cordova-plugin-device-orientation
     
 
 ## Unterstützte Plattformen
