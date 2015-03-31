@@ -3,7 +3,7 @@
   "version": "0.3.12-dev",
   "description": "Cordova Device Orientation Plugin",
   "cordova": {
-    "id": "org.apache.cordova.device-orientation",
+    "id": "cordova-plugin-device-orientation",
     "platforms": [
       "firefoxos",
       "android",
