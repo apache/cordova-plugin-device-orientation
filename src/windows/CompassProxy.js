@@ -23,8 +23,8 @@
 /*global Windows:true, require, module, setTimeout */
 
 var cordova = require('cordova'),
-    CompassHeading = require('cordova-plugin-device-orientation.CompassHeading'),
-    CompassError = require('cordova-plugin-device-orientation.CompassError');
+    CompassHeading = require('org.apache.cordova.device-orientation.CompassHeading'),
+    CompassError = require('org.apache.cordova.device-orientation.CompassError');
 
 
 module.exports = {
