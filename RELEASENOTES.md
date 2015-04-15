@@ -88,3 +88,21 @@
 
 ### 0.3.11 (Feb 04, 2015)
 * CB-8351 ios: Use argumentForIndex rather than NSArray extension
+
+### 1.0.0 (Apr 15, 2015)
+* CB-8746 gave plugin major version bump
+* CB-8683 updated windows and tizen specific references of old id to new id
+* CB-8683 changed plugin-id to pacakge-name
+* CB-8653 properly updated translated docs to use new id
+* CB-8653 updated translated docs to use new id
+* Use TRAVIS_BUILD_DIR, install paramedic by npm
+* CB-8653 Updated Readme
+* CB-8659: ios: 4.0.x Compatibility: Remove use of initWebView method
+* CB-8659: ios: 4.0.x Compatibility: Remove use of deprecated headers
+* force async callbacks
+* Updated plugin to be 'windows' instead of 'windows8'
+* CB-8614 Fixed getCurrentHeading and watchHeading on windows platform
+* CB-8563 Integrate TravisCI
+* CB-8438 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
+* CB-8538 Added package.json file
+* CB-8458 Fixes false failure of test, when compass hardware is not available
