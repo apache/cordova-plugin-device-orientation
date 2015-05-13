@@ -67,7 +67,6 @@ exports.defineAutoTests = function () {
         });
 
         it("compass.spec.1 should exist", function () {
-            console.log("In spec 1");
             expect(navigator.compass).toBeDefined();
         });
 
