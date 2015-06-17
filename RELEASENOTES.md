@@ -106,3 +106,8 @@
 * CB-8438 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
 * CB-8538 Added package.json file
 * CB-8458 Fixes false failure of test, when compass hardware is not available
+
+### 1.0.1 (Jun 17, 2015)
+* CB-9128 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
+* fix npm md issue
+* Remove console log message from test
