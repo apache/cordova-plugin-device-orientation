@@ -26,6 +26,7 @@ var argscheck = require('cordova/argscheck'),
     CompassError = require('./CompassError'),
 
     timers = {},
+    eventTimerId = null,
     compass = {
         /**
          * Asynchronously acquires the current heading.
@@ -79,12 +80,20 @@ var argscheck = require('cordova/argscheck'),
                 }, frequency);
             }
 
+            if (cordova.platformId === 'browser' && !eventTimerId) {
+                // Start firing deviceorientation events if haven't already
+                var deviceorientationEvent = new Event('deviceorientation');
+                eventTimerId = window.setInterval(function() {
+                    window.dispatchEvent(deviceorientationEvent);
+                }, 200);
+            }
+
             return id;
         },
 
         /**
          * Clears the specified heading watch.
-         * @param {String} watchId The ID of the watch returned from #watchHeading.
+         * @param {String} id The ID of the watch returned from #watchHeading.
          */
         clearWatch:function(id) {
             // Stop javascript timer & remove from timer list
@@ -96,6 +105,12 @@ var argscheck = require('cordova/argscheck'),
                     exec(null, null, "Compass", "stopHeading", []);
                 }
                 delete timers[id];
+
+                if (eventTimerId && Object.keys(timers).length === 0) {
+                    // No more watchers, so stop firing 'deviceorientation' events
+                    window.clearInterval(eventTimerId);
+                    eventTimerId = null;
+                }
             }
         }
     };

@@ -169,9 +169,5 @@
         <js-module src="src/browser/CompassProxy.js" name="CompassProxy">
             <runs/>
         </js-module>
-
-        <js-module src="src/browser/compass.js" name="compass">
-            <merges target="navigator.compass" />
-        </js-module>
     </platform>
 </plugin>
