@@ -168,7 +168,7 @@ A `CompassHeading` object is returned to the `compassSuccess` callback function.
 
 - __headingAccuracy__: The deviation in degrees between the reported heading and the true heading. _(Number)_
 
-- __timestamp__: The time at which this heading was determined.  _(milliseconds)_
+- __timestamp__: The time at which this heading was determined.  _(DOMTimeStamp)_
 
 
 ### Amazon Fire OS Quirks

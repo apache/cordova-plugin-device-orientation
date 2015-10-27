@@ -22,7 +22,7 @@ module.exports = {
                     magneticHeading: orientation.alpha,
                     trueHeading: 360-orientation.alpha,
                     headingAccuracy: 360-(2*orientation.alpha),
-                    timestamp: new Date().getTime
+                    timestamp: new Date().getTime()
                 };
                 window.removeEventListener("deviceorientation", callback);
                 result.callbackOk(info, false);
