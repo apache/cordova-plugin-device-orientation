@@ -20,6 +20,12 @@
 -->
 # Release Notes
 
+### 1.0.2 (Nov 18, 2015)
+* CB-10035 Updated `RELEASENOTES` to be newest to oldest
+* CB-4596 Fix `timestamp` to be `DOMTimeStamp` across the board
+* Fixing contribute link.
+* CB-9426 Fix exception when using device orientation plugin on **browser** platform.
+
 ### 1.0.1 (Jun 17, 2015)
 * CB-9128 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
 * fix npm md issue
