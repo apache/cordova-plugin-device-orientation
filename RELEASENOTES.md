@@ -21,71 +21,71 @@
 # Release Notes
 
 ### 1.0.2 (Nov 18, 2015)
-* CB-10035 Updated `RELEASENOTES` to be newest to oldest
-* CB-4596 Fix `timestamp` to be `DOMTimeStamp` across the board
+* [CB-10035](https://issues.apache.org/jira/browse/CB-10035) Updated `RELEASENOTES` to be newest to oldest
+* [CB-4596](https://issues.apache.org/jira/browse/CB-4596) Fix `timestamp` to be `DOMTimeStamp` across the board
 * Fixing contribute link.
-* CB-9426 Fix exception when using device orientation plugin on **browser** platform.
+* [CB-9426](https://issues.apache.org/jira/browse/CB-9426) Fix exception when using device orientation plugin on **browser** platform.
 
 ### 1.0.1 (Jun 17, 2015)
-* CB-9128 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
+* [CB-9128](https://issues.apache.org/jira/browse/CB-9128) cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
 * fix npm md issue
 * Remove console log message from test
 
 ### 1.0.0 (Apr 15, 2015)
-* CB-8746 gave plugin major version bump
-* CB-8683 updated windows and tizen specific references of old id to new id
-* CB-8683 changed plugin-id to pacakge-name
-* CB-8653 properly updated translated docs to use new id
-* CB-8653 updated translated docs to use new id
+* [CB-8746](https://issues.apache.org/jira/browse/CB-8746) gave plugin major version bump
+* [CB-8683](https://issues.apache.org/jira/browse/CB-8683) updated windows and tizen specific references of old id to new id
+* [CB-8683](https://issues.apache.org/jira/browse/CB-8683) changed plugin-id to pacakge-name
+* [CB-8653](https://issues.apache.org/jira/browse/CB-8653) properly updated translated docs to use new id
+* [CB-8653](https://issues.apache.org/jira/browse/CB-8653) updated translated docs to use new id
 * Use TRAVIS_BUILD_DIR, install paramedic by npm
-* CB-8653 Updated Readme
-* CB-8659: ios: 4.0.x Compatibility: Remove use of initWebView method
-* CB-8659: ios: 4.0.x Compatibility: Remove use of deprecated headers
+* [CB-8653](https://issues.apache.org/jira/browse/CB-8653) Updated Readme
+* [CB-8659](https://issues.apache.org/jira/browse/CB-8659): ios: 4.0.x Compatibility: Remove use of initWebView method
+* [CB-8659](https://issues.apache.org/jira/browse/CB-8659): ios: 4.0.x Compatibility: Remove use of deprecated headers
 * force async callbacks
 * Updated plugin to be 'windows' instead of 'windows8'
-* CB-8614 Fixed getCurrentHeading and watchHeading on windows platform
-* CB-8563 Integrate TravisCI
-* CB-8438 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
-* CB-8538 Added package.json file
-* CB-8458 Fixes false failure of test, when compass hardware is not available
+* [CB-8614](https://issues.apache.org/jira/browse/CB-8614) Fixed getCurrentHeading and watchHeading on windows platform
+* [CB-8563](https://issues.apache.org/jira/browse/CB-8563) Integrate TravisCI
+* [CB-8438](https://issues.apache.org/jira/browse/CB-8438) cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
+* [CB-8538](https://issues.apache.org/jira/browse/CB-8538) Added package.json file
+* [CB-8458](https://issues.apache.org/jira/browse/CB-8458) Fixes false failure of test, when compass hardware is not available
 
 ### 0.3.11 (Feb 04, 2015)
-* CB-8351 ios: Use argumentForIndex rather than NSArray extension
+* [CB-8351](https://issues.apache.org/jira/browse/CB-8351) ios: Use argumentForIndex rather than NSArray extension
 
 ### 0.3.10 (Dec 02, 2014)
-* CB-7977 Mention `deviceready` in plugin docs
-* CB-7700 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
-* CB-7571 Bump version of nested plugin to match parent plugin
+* [CB-7977](https://issues.apache.org/jira/browse/CB-7977) Mention `deviceready` in plugin docs
+* [CB-7700](https://issues.apache.org/jira/browse/CB-7700) cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
+* [CB-7571](https://issues.apache.org/jira/browse/CB-7571) Bump version of nested plugin to match parent plugin
 
 ### 0.3.9 (Sep 17, 2014)
-* CB-7471 cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
+* [CB-7471](https://issues.apache.org/jira/browse/CB-7471) cordova-plugin-device-orientation documentation translation: cordova-plugin-device-orientation
 * Fixed problem with watchCompass if pressed twice
-* CB-7086 Renamed dir, added nested plugin.xml
+* [CB-7086](https://issues.apache.org/jira/browse/CB-7086) Renamed dir, added nested plugin.xml
 * added documentation for manual tests
 * Fixed problem with watchCompass if pressed twice
-* CB-7086 Renamed dir, added nested plugin.xml
+* [CB-7086](https://issues.apache.org/jira/browse/CB-7086) Renamed dir, added nested plugin.xml
 * added documentation for manual tests
 * Updated docs for browser
 * Add support for the browser
-* CB-7249 cordova-plugin-device-orientation documentation translation
-* CB-6960 Added manual tests
-* CB-6960 Port compass tests to plugin-test-framework
+* [CB-7249](https://issues.apache.org/jira/browse/CB-7249) cordova-plugin-device-orientation documentation translation
+* [CB-6960](https://issues.apache.org/jira/browse/CB-6960) Added manual tests
+* [CB-6960](https://issues.apache.org/jira/browse/CB-6960) Port compass tests to plugin-test-framework
 
 ### 0.3.8 (Aug 06, 2014)
 * **FFOS** update compass.js
-* CB-7187 ios: Add explicit dependency on CoreLocation.framework
-* CB-7187 Delete unused #import of CDVShared.h
+* [CB-7187](https://issues.apache.org/jira/browse/CB-7187) ios: Add explicit dependency on CoreLocation.framework
+* [CB-7187](https://issues.apache.org/jira/browse/CB-7187) Delete unused #import of CDVShared.h
 
 ### 0.3.7 (Jun 05, 2014)
-* CB-6799 Add license
+* [CB-6799](https://issues.apache.org/jira/browse/CB-6799) Add license
 * windows8. makes getHeading callback spec compliant
-* CB-6491 add CONTRIBUTING.md
+* [CB-6491](https://issues.apache.org/jira/browse/CB-6491) add CONTRIBUTING.md
 
 ### 0.3.6 (Apr 17, 2014)
-* CB-6381: [WP8] unexpected error object
-* CB-6422: [windows8] use cordova/exec/proxy
-* CB-6460: Update license headers
-* CB-6465: Add license headers to Tizen code
+* [CB-6381](https://issues.apache.org/jira/browse/CB-6381): [WP8] unexpected error object
+* [CB-6422](https://issues.apache.org/jira/browse/CB-6422): [windows8] use cordova/exec/proxy
+* [CB-6460](https://issues.apache.org/jira/browse/CB-6460): Update license headers
+* [CB-6465](https://issues.apache.org/jira/browse/CB-6465): Add license headers to Tizen code
 * Add NOTICE file
 
 ### 0.3.5 (Feb 05, 2014)
@@ -95,7 +95,7 @@
 * FFOS info added
 
 ### 0.3.4 (Jan 02, 2014)
-* CB-5658 Add doc/index.md for Compass plugin
+* [CB-5658](https://issues.apache.org/jira/browse/CB-5658) Add doc/index.md for Compass plugin
 
 ### 0.3.3 (Dec 4, 2013)
 * add ubuntu platform
@@ -103,16 +103,16 @@
 
 ### 0.3.2 (Oct 28, 2013)
 * orientation plugin
-* CB-5128: added repo + issue tag to plugin.xml for device orientation plugin
-* [CB-4915] Incremented plugin version on dev branch.
+* [CB-5128](https://issues.apache.org/jira/browse/CB-5128): added repo + issue tag to plugin.xml for device orientation plugin
+* [CB-4915](https://issues.apache.org/jira/browse/CB-4915) Incremented plugin version on dev branch.
 
 ### 0.3.1 (Sept 25, 2013)
-* CB-4889 renaming id
-* CB-4889 renaming core in CompassProxy
-* [CB-4900] Windows 8 Compass plugin have extra define breaks plugin loading
+* [CB-4889](https://issues.apache.org/jira/browse/CB-4889) renaming id
+* [CB-4889](https://issues.apache.org/jira/browse/CB-4889) renaming core in CompassProxy
+* [CB-4900](https://issues.apache.org/jira/browse/CB-4900) Windows 8 Compass plugin have extra define breaks plugin loading
 * [windows8] commandProxy was moved
 * Rename CHANGELOG.md -> RELEASENOTES.md
-* [CB-4752] Incremented plugin version on dev branch.
+* [CB-4752](https://issues.apache.org/jira/browse/CB-4752) Incremented plugin version on dev branch.
 
 ### 0.3.0 (Sept 5, 2013)
-* [CB-3687] Added blackberry10 support
+* [CB-3687](https://issues.apache.org/jira/browse/CB-3687) Added blackberry10 support
