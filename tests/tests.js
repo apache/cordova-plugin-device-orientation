@@ -19,13 +19,14 @@
 *
 */
 
+/* jshint jasmine: true */
+
 exports.defineAutoTests = function () {
     var fail = function (done, message) {
         message = (typeof message !== 'string') ? "Forced failure: wrong callback called" : message;
         expect(true).toFailWithMessage(message);
         done();
     },
-        unexpectedSuccess = "Forced failure: success callback should not have been called",
         unexpectedFailure = "Forced failure: error callback should not have been called";
 
     describe('Compass (navigator.compass)', function () {
@@ -150,6 +151,24 @@ exports.defineManualTests = function (contentEl, createActionButton) {
     var watchCompassId = null;
 
     /**
+     * Set compass status
+     */
+    function setCompassStatus(status) {
+        document.getElementById('compass_status').innerHTML = status;
+    }
+
+    /**
+     * Stop watching the acceleration
+     */
+    function stopCompass() {
+        setCompassStatus("Stopped");
+        if (watchCompassId) {
+            navigator.compass.clearWatch(watchCompassId);
+            watchCompassId = null;
+        }
+    }
+
+    /**
      * Start watching compass
      */
     var watchCompass = function () {
@@ -179,17 +198,6 @@ exports.defineManualTests = function (contentEl, createActionButton) {
     };
 
     /**
-     * Stop watching the acceleration
-     */
-    var stopCompass = function () {
-        setCompassStatus("Stopped");
-        if (watchCompassId) {
-            navigator.compass.clearWatch(watchCompassId);
-            watchCompassId = null;
-        }
-    };
-
-    /**
      * Get current compass
      */
     var getCompass = function () {
@@ -212,13 +220,6 @@ exports.defineManualTests = function (contentEl, createActionButton) {
         // Make call
         var opt = {};
         navigator.compass.getCurrentHeading(success, fail, opt);
-    };
-
-    /**
-     * Set compass status
-     */
-    var setCompassStatus = function (status) {
-        document.getElementById('compass_status').innerHTML = status;
     };
 
     /******************************************************************************/

@@ -19,8 +19,7 @@
  *
 */
 
-var cordova = require('cordova'),
-    CompassHeading = require('cordova-plugin-device-orientation.CompassHeading'),
+var CompassHeading = require('cordova-plugin-device-orientation.CompassHeading'),
     CompassError = require('cordova-plugin-device-orientation.CompassError');
 
 var compassCallback = null,

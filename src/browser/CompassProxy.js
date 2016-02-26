@@ -39,7 +39,5 @@ var Compass = {
     }
 };
 
-var browser = require('cordova/platform');
-
 module.exports = Compass;
 require('cordova/exec/proxy').add('Compass', Compass);

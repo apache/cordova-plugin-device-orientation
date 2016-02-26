@@ -22,8 +22,7 @@
 /*jslint sloppy:true */
 /*global Windows:true, require, module, setTimeout */
 
-var cordova = require('cordova'),
-    CompassHeading = require('cordova-plugin-device-orientation.CompassHeading'),
+var CompassHeading = require('cordova-plugin-device-orientation.CompassHeading'),
     CompassError = require('cordova-plugin-device-orientation.CompassError');
 
 
