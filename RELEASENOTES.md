@@ -20,6 +20,10 @@
 -->
 # Release Notes
 
+### 1.0.3 (Apr 15, 2016)
+* Remove `warning` emoji, as it doesn't correctly display in the docs website: http://cordova.apache.org/docs/en/dev/cordova-plugin-device-orientation/index.html
+* CB-10636 Add `JSHint` for plugins
+
 ### 1.0.2 (Nov 18, 2015)
 * [CB-10035](https://issues.apache.org/jira/browse/CB-10035) Updated `RELEASENOTES` to be newest to oldest
 * [CB-4596](https://issues.apache.org/jira/browse/CB-4596) Fix `timestamp` to be `DOMTimeStamp` across the board
