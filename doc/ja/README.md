@@ -189,9 +189,7 @@
 ### iOS の癖
 
   * `trueHeading`経由で有効になっている位置情報サービスのプロパティが返されますのみ`navigator.geolocation.watchLocation()`.
-
-  * IOS 4 デバイス上見出しデバイスの現在の向きの要因そして、その向きをサポートするアプリケーションのための絶対位置を参照していません。
-
+ 
 ## CompassError
 
 `CompassError` オブジェクトにエラーが発生したときに `compassError` コールバック関数に返されます。

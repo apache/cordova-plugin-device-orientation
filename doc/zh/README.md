@@ -190,8 +190,6 @@
 
   * `trueHeading`屬性只返回位置服務通過以下方式啟用`navigator.geolocation.watchLocation()`.
 
-  * IOS 4 設備及以上，標題中設備的當前方向的因素，也不引用其絕對的位置，用於支援該方向的應用程式。
-
 ## CompassError
 
 當發生錯誤時，`compassError` 回呼函數情況下會返回一個 `CompassError` 物件。

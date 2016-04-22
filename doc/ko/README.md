@@ -190,8 +190,6 @@
 
   * `trueHeading`속성을 통해 위치 서비스에 대 한 반환만`navigator.geolocation.watchLocation()`.
 
-  * IOS 4 장치에 대 한 위의 제목 소자의 현재 방향에서 요인 그리고, 그 방향을 지 원하는 애플 리 케이 션에 대 한 그것의 절대 위치를 참조 하지 않습니다.
-
 ## CompassError
 
 `CompassError` 개체는 오류가 발생 하면 `compassError` 콜백 함수에 반환 됩니다.
