@@ -243,6 +243,7 @@
         [self stopHeading:nil];
     }
     hData.headingStatus = HEADINGRUNNING;  // to clear any error
+    __locationStarted = YES;
 }
 
 - (void)locationManager:(CLLocationManager*)manager didFailWithError:(NSError*)error
