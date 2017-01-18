@@ -153,7 +153,7 @@
         <!-- windows -->
     <platform name="windows">
         <js-module src="src/windows/CompassProxy.js" name="CompassProxy">
-            <merges target="" />
+            <runs />
         </js-module>
     </platform>
 
