@@ -2,6 +2,7 @@
   "name": "cordova-plugin-device-orientation",
   "version": "1.0.6-dev",
   "description": "Cordova Device Orientation Plugin",
+  "types": "./types/index.d.ts",
   "cordova": {
     "id": "cordova-plugin-device-orientation",
     "platforms": [
