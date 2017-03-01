@@ -21,7 +21,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-device-orientation"
-    version="1.0.6-dev">
+    version="1.0.6">
 
     <name>Device Orientation</name>
     <description>Cordova Device Orientation Plugin</description>
@@ -48,8 +48,8 @@
             <feature name="Compass">
                 <param name="firefoxos-package" value="Compass" />
             </feature>
-        </config-file>                                         
-        
+        </config-file>
+
         <js-module src="src/firefoxos/compass.js" name="compass-impl">
           <runs />
         </js-module>
@@ -86,7 +86,7 @@
 
 	    <source-file src="src/android/CompassListener.java" target-dir="src/org/apache/cordova/deviceorientation" />
     </platform>
-    
+
     <!-- ubuntu -->
     <platform name="ubuntu">
         <header-file src="src/ubuntu/compass.h" />
