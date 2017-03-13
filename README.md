@@ -27,6 +27,7 @@ description: Access compass data.
 
 # cordova-plugin-device-orientation
 
+DUMMY ENTRY
 
 This plugin provides access to the device's compass. The compass is a sensor
 that detects the direction or heading that the device is pointed, typically
