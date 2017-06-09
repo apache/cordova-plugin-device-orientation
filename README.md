@@ -27,6 +27,9 @@ description: Access compass data.
 
 # cordova-plugin-device-orientation
 
+## Deprecated
+
+> This plugin is no longer being worked on as the functionality provided by this plugin is now included in most browsers. For users who want to get the device's compass heading they should implement a `deviceorientation ` event listener as outlined in the [W3C DeviceOrientation Event Specification](https://w3c.github.io/deviceorientation/spec-source-orientation.html).
 
 This plugin provides access to the device's compass. The compass is a sensor
 that detects the direction or heading that the device is pointed, typically

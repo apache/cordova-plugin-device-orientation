@@ -24,7 +24,7 @@
     version="1.0.8-dev">
 
     <name>Device Orientation</name>
-    <description>Cordova Device Orientation Plugin</description>
+    <description>[DEPRECATED] Cordova Device Orientation Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,device,orientation</keywords>
     <repo>https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git</repo>
