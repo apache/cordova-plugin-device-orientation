@@ -47,7 +47,6 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     public static int STARTING = 1;
     public static int RUNNING = 2;
     public static int ERROR_FAILED_TO_START = 3;
-    private static int SAMSUNG_SENSOR_TYPE_ORIENTATION = 65558;
 
     public long TIMEOUT = 30000;        // Timeout in msec to shut off listener
 
@@ -167,11 +166,6 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
         // Get compass sensor from sensor manager
         @SuppressWarnings("deprecation")
         List<Sensor> list = this.sensorManager.getSensorList(Sensor.TYPE_ORIENTATION);
-
-        // Sensors from 'Samsung Electronic' vendor have another orientation type (65558)
-        if (list != null && list.size() == 0) {
-            list = this.sensorManager.getSensorList(CompassListener.SAMSUNG_SENSOR_TYPE_ORIENTATION);
-        }
 
         // If found, then register as listener
         if (list != null && list.size() > 0) {
