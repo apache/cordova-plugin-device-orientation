@@ -49,22 +49,31 @@ exports.defineAutoTests = function () {
             });
         });
 
-        var isCompassAvailable = true;
+        var isCompassAvailable = null;
 
         beforeEach(function (done) {
-            if (!isCompassAvailable) {
+            if (isCompassAvailable === false) {
                 // if we're already ensured that compass is not available, no need to check it again
                 done();
                 return;
+            } else if (isCompassAvailable === null) {
+                // Try to access compass device, and if it is not available
+                // set hardwarefailure flag to mark some tests pending
+                navigator.compass.getCurrentHeading(function () {
+                    isCompassAvailable = true;
+                    done();
+                }, function (error) {
+                    if (error.code == CompassError.COMPASS_NOT_SUPPORTED) {
+                        isCompassAvailable = false;
+                    }
+                    done();
+                });
+            } else {
+                // wait a little
+                setTimeout(function () {
+                    done();
+                }, 200);
             }
-            // Try to access compass device, and if it is not available
-            // set hardwarefailure flag to mark some tests pending
-            navigator.compass.getCurrentHeading(done, function (error) {
-                if (error.code == CompassError.COMPASS_NOT_SUPPORTED) {
-                    isCompassAvailable = false;
-                }
-                done();
-            });
         });
 
         it("compass.spec.1 should exist", function () {
@@ -175,16 +184,16 @@ exports.defineAutoTests = function () {
                 var watchCleared = false;
 
                 var watchId = navigator.compass.watchHeading(
-                    function (a){
+                    function (a) {
                         // Don't invoke this function if we have cleared the watch
                         expect(watchCleared).toBe(false);
 
-                        if (calledOnce) {
+                        if (calledOnce && !watchCleared) {
                             navigator.compass.clearWatch(watchId);
                             watchCleared = true;
-                            setInterval(function(){
+                            setTimeout(function(){
                                 done();
-                            }, 100);
+                            }, 1000);
                         }
 
                         calledOnce = true;

@@ -21,21 +21,15 @@
 
 var Compass = {
     getHeading: function(success, error) {
-        var listener = function() {
-            var orient = {};
-            var heading = (Math.round((Math.random() * 360) * 100) / 100);
+        var orient = {};
+        var heading = (Math.round((Math.random() * 360) * 100) / 100);
 
-            orient.trueHeading = heading;
-            orient.magneticHeading = heading;
-            orient.headingAccuracy = 0;
-            orient.timestamp = new Date().getTime();
+        orient.trueHeading = heading;
+        orient.magneticHeading = heading;
+        orient.headingAccuracy = 0;
+        orient.timestamp = new Date().getTime();
 
-            success(orient);
-
-            window.removeEventListener('deviceorientation', listener, false);
-        };
-
-        return window.addEventListener('deviceorientation', listener, false);
+        success(orient);
     }
 };
 
