@@ -27,6 +27,14 @@ description: Access compass data.
 
 # cordova-plugin-device-orientation
 
+# Deprecation Notice
+
+With the [W3C Device Orientation API](https://www.w3.org/TR/2016/CR-orientation-event-20160818/) now being
+supported on iOS, Android and Windows devices, this plugin is not needed any more. Migrating from this plugin to
+the [W3C Device Orientation API](https://www.w3.org/TR/2016/CR-orientation-event-20160818/) is explained in this
+[PhoneGap blog](https://blog.phonegap.com/migrating-from-the-cordova-device-orientation-plugin-8442b869e6cc)
+
+
 
 This plugin provides access to the device's compass. The compass is a sensor
 that detects the direction or heading that the device is pointed, typically
