@@ -36,6 +36,7 @@ the [W3C Device Orientation API](https://www.w3.org/TR/2016/CR-orientation-event
 
 ------
 
+## Description
 
 This plugin provides access to the device's compass. The compass is a sensor
 that detects the direction or heading that the device is pointed, typically
