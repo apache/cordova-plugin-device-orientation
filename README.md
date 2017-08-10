@@ -51,7 +51,7 @@ Although the object is attached to the global scoped `navigator`, it is not avai
         console.log(navigator.compass);
     }
 
-Report issues on the [Apache Cordova issue tracker](https://issues.apache.org/jira/issues/?jql=project%20%3D%20CB%20AND%20status%20in%20%28Open%2C%20%22In%20Progress%22%2C%20Reopened%29%20AND%20resolution%20%3D%20Unresolved%20AND%20component%20%3D%20%22Plugin%20Device%20Orientation%22%20ORDER%20BY%20priority%20DESC%2C%20summary%20ASC%2C%20updatedDate%20DESC)
+Report issues on the [Apache Cordova issue tracker](https://issues.apache.org/jira/secure/RapidBoard.jspa?rapidView=190&projectKey=CB)
 
 ## Installation
 
