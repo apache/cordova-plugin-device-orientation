@@ -20,7 +20,7 @@
 -->
 # Release Notes
 
-### 1.0.8 (Sep 18, 2017)
+### 2.0.0 (Sep 18, 2017)
 * [CB-13076](https://issues.apache.org/jira/browse/CB-13076) added deprecation notice to info tag
 * [CB-12728](https://issues.apache.org/jira/browse/CB-12728) Device Orientation - SUNSET
 * [CB-13028](https://issues.apache.org/jira/browse/CB-13028) (CI) **Browser** builds on `Travis` and `AppVeyor`
