@@ -20,6 +20,18 @@
 -->
 # Release Notes
 
+### 1.0.8 (Sep 18, 2017)
+* [CB-13076](https://issues.apache.org/jira/browse/CB-13076) added deprecation notice to info tag
+* [CB-12728](https://issues.apache.org/jira/browse/CB-12728) Device Orientation - SUNSET
+* [CB-13028](https://issues.apache.org/jira/browse/CB-13028) (CI) **Browser** builds on `Travis` and `AppVeyor`
+* [CB-12667](https://issues.apache.org/jira/browse/CB-12667) Reset changes for searching Samsung sensors
+* [CB-13000](https://issues.apache.org/jira/browse/CB-13000) (CI) Speed up **Android** builds
+* [CB-12991](https://issues.apache.org/jira/browse/CB-12991) (CI) Updated CI badges
+* [CB-12935](https://issues.apache.org/jira/browse/CB-12935) (**windows**) Enable paramedic builds on `AppVeyor`
+* [CB-12935](https://issues.apache.org/jira/browse/CB-12935) (**ios**, **Android**) Enable paramedic builds on `Travis CI`
+* [CB-12667](https://issues.apache.org/jira/browse/CB-12667) **Android**: Added logic for searching sensors from Samsung vendor
+* [CB-12847](https://issues.apache.org/jira/browse/CB-12847) added `bugs` entry to `package.json`.
+
 ### 1.0.7 (Apr 27, 2017)
 * [CB-12622](https://issues.apache.org/jira/browse/CB-12622) Added **Android 6.0** build badge to `README`
 * [CB-12685](https://issues.apache.org/jira/browse/CB-12685) added `package.json` to tests folder
