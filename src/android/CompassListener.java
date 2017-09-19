@@ -29,12 +29,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.content.Context;
 
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -49,15 +53,24 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     public static int ERROR_FAILED_TO_START = 3;
 
     public long TIMEOUT = 30000;        // Timeout in msec to shut off listener
+    private static final int DECLINATION_CHECK_INTERVAL = 30 * 60 * 1000;
 
     int status;                         // status of listener
     float heading;                      // most recent heading value
+    float trueHeading;                  // most recent true heading value
     long timeStamp;                     // time of most recent value
     long lastAccessTime;                // time the value was last retrieved
     int accuracy;                       // accuracy of the sensor
 
-    private SensorManager sensorManager;// Sensor manager
-    Sensor mSensor;                     // Compass sensor returned by sensor manager
+    //for checking magnetic declination/determining true heading
+    private Criteria locationCriteria = new Criteria();
+    private Location geomagneticFieldLocation;
+    private long lastDeclinationCheck;
+    private GeomagneticField geomagneticField;
+
+    private LocationManager locationManager;
+    private SensorManager sensorManager;        // Sensor manager
+    Sensor mSensor;                             // Compass sensor returned by sensor manager
 
     private CallbackContext callbackContext;
 
@@ -66,7 +79,12 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
      */
     public CompassListener() {
         this.heading = 0;
+        this.trueHeading = 0;
         this.timeStamp = 0;
+
+        //doesn't need precise location for checking magnetic declination
+        locationCriteria.setAccuracy(Criteria.ACCURACY_COARSE);
+
         this.setStatus(CompassListener.STOPPED);
     }
 
@@ -80,15 +98,16 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
         this.sensorManager = (SensorManager) cordova.getActivity().getSystemService(Context.SENSOR_SERVICE);
+        this.locationManager = (LocationManager) cordova.getActivity().getSystemService(Context.LOCATION_SERVICE);
     }
 
     /**
      * Executes the request and returns PluginResult.
      *
      * @param action                The action to execute.
-     * @param args          	    JSONArry of arguments for the plugin.
-     * @param callbackS=Context     The callback id used when calling back into JavaScript.
-     * @return              	    True if the action was valid.
+     * @param args                  JSONArry of arguments for the plugin.
+     * @param callbackContext     The callback id used when calling back into JavaScript.
+     * @return                      True if the action was valid.
      * @throws JSONException 
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -212,7 +231,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     /**
      * Sensor listener event.
      *
-     * @param SensorEvent event
+     * @param event
      */
     public void onSensorChanged(SensorEvent event) {
 
@@ -222,6 +241,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
         // Save heading
         this.timeStamp = System.currentTimeMillis();
         this.heading = heading;
+
         this.setStatus(CompassListener.RUNNING);
 
         // If heading hasn't been read for TIMEOUT time, then turn off compass sensor to save power
@@ -246,6 +266,13 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
      */
     public float getHeading() {
         this.lastAccessTime = System.currentTimeMillis();
+
+        updateDeclination();
+        if (geomagneticField != null) {
+            this.trueHeading = (heading + geomagneticField.getDeclination() + 360) % 360;
+        }else
+            this.trueHeading = -1;
+
         return this.heading;
     }
 
@@ -284,13 +311,34 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
         JSONObject obj = new JSONObject();
 
         obj.put("magneticHeading", this.getHeading());
-        obj.put("trueHeading", this.getHeading());
-        // Since the magnetic and true heading are always the same our and accuracy
-        // is defined as the difference between true and magnetic always return zero
-        obj.put("headingAccuracy", 0);
+        obj.put("trueHeading", this.trueHeading);
+        obj.put("headingAccuracy", geomagneticField != null ? geomagneticField.getDeclination() : 0);
         obj.put("timestamp", this.timeStamp);
 
         return obj;
+    }
+
+    /**
+     * Check for magnetic declination using the locationManager and geomagneticField
+     * 
+     */
+    private void updateDeclination()
+    {
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime - lastDeclinationCheck > DECLINATION_CHECK_INTERVAL) {
+            String provider = locationManager.getBestProvider(locationCriteria, true);
+            if (provider != null) {
+                Location location = locationManager.getLastKnownLocation(provider);
+                if (location != null) {
+                    if (geomagneticFieldLocation == null || (location.getTime() > geomagneticFieldLocation.getTime())) {
+                        geomagneticField = new GeomagneticField((float)location.getLatitude(), (float)location.getLongitude(), (float)(location.getAltitude()), currentTime);
+                        geomagneticFieldLocation = location;
+                    }
+                }
+            }
+            lastDeclinationCheck = currentTime;
+        }
     }
 
 }
