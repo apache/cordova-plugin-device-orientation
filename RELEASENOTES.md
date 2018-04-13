@@ -20,6 +20,9 @@
 -->
 # Release Notes
 
+### 2.0.1 (April 13, 2017)
+* [CB-14002](https://issues.apache.org/jira/browse/CB-14002): Fix `cordovaDependencies` to allow plugin install 
+
 ### 2.0.0 (Sep 18, 2017)
 * [CB-13076](https://issues.apache.org/jira/browse/CB-13076) added deprecation notice to info tag
 * [CB-12728](https://issues.apache.org/jira/browse/CB-12728) Device Orientation - SUNSET
