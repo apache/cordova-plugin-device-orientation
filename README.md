@@ -27,12 +27,11 @@ description: Access compass data.
 
 # cordova-plugin-device-orientation
 
-# Deprecation Notice
+# Usage Notice
 
-With the [W3C Device Orientation API](https://www.w3.org/TR/2016/CR-orientation-event-20160818/) now being
-supported on iOS, Android and Windows devices, this plugin is not needed any more. Migrating from this plugin to
-the [W3C Device Orientation API](https://www.w3.org/TR/2016/CR-orientation-event-20160818/) is explained in this
-[PhoneGap blog post](https://blog.phonegap.com/migrating-from-the-cordova-device-orientation-plugin-8442b869e6cc).
+With the [W3C Device Orientation API](https://www.w3.org/TR/orientation-event/) now being supported on Android and Windows devices, this plugin is not needed any more.
+
+However, for iOS 13+ a so called secure context is required. Apple does not allow access to the device’s orientation or the permission request from insecure browsing contexts. If you use a custom scheme for your iOS app the browsing context is considered insecure. To solve this problem, the plugin is mandatory for iOS 13+ if you plan to use the device orientation feature.
 
 ------
 
