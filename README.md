@@ -31,7 +31,7 @@ description: Access compass data.
 
 With the [W3C Device Orientation API](https://www.w3.org/TR/orientation-event/) now being supported on Android, iOS and Windows devices, this plugin may not needed any more.
 
-However, for iOS 13+ a so called secure context is required. Apple does not allow access to the device’s orientation or the permission request from insecure browsing contexts. If you use a custom scheme for your iOS app the browsing context is considered insecure. To solve this problem, the plugin is mandatory for iOS 13+ if you plan to use the device orientation feature.
+However, for iOS 13+ a so called [secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts) is required. Apple does not allow access to the device’s orientation or the permission request from insecure browsing contexts. If you use a custom scheme, i.e., do not use the `file` protocol for your iOS app the browsing context is considered insecure. To solve this problem, the plugin is mandatory for iOS 13+ if you plan to use the device orientation feature.
 
 ------
 
