@@ -6,16 +6,9 @@
   "cordova": {
     "id": "cordova-plugin-device-orientation",
     "platforms": [
-      "firefoxos",
       "android",
-      "amazon-fireos",
-      "ubuntu",
-      "blackberry10",
       "ios",
-      "wp7",
-      "wp8",
-      "windows8",
-      "tizen",
+      "windows",
       "browser"
     ]
   },
@@ -31,16 +24,9 @@
     "device",
     "orientation",
     "ecosystem:cordova",
-    "cordova-firefoxos",
     "cordova-android",
-    "cordova-amazon-fireos",
-    "cordova-ubuntu",
-    "cordova-blackberry10",
     "cordova-ios",
-    "cordova-wp7",
-    "cordova-wp8",
-    "cordova-windows8",
-    "cordova-tizen",
+    "cordova-windows",
     "cordova-browser"
   ],
   "scripts": {
