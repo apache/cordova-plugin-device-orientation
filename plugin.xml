@@ -24,11 +24,11 @@
     version="2.0.2-dev">
 
     <name>Device Orientation</name>
-    <description>[DEPRECATED] Cordova Device Orientation Plugin</description>
+    <description>Cordova Device Orientation Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,device,orientation</keywords>
-    <repo>https://git-wip-us.apache.org/repos/asf/cordova-plugin-device-orientation.git</repo>
-    <issue>https://issues.apache.org/jira/browse/CB/component/12320637</issue>
+    <repo>https://github.com/apache/cordova-plugin-device-orientation</repo>
+    <issue>https://github.com/apache/cordova-plugin-device-orientation/issues</issue>
 
     <js-module src="www/CompassError.js" name="CompassError">
         <clobbers target="CompassError" />
@@ -41,11 +41,6 @@
     <js-module src="www/compass.js" name="compass">
         <clobbers target="navigator.compass" />
     </js-module>
-
-    <info>
-        [DEPRECATED] - cordova-plugin-device-orientation
-        With the W3C Device Motion and Orientation API now being supported on iOS, Android and Windows devices, this plugin is not needed any more. Read more about the API at https://www.w3.org/TR/2016/CR-orientation-event-20160818/ 
-    </info>
 
     <!-- android -->
     <platform name="android">

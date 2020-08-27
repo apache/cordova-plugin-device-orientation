@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-device-orientation",
   "version": "2.0.2-dev",
-  "description": "[DEPRECATED] Cordova Device Orientation Plugin",
+  "description": "Cordova Device Orientation Plugin",
   "types": "./types/index.d.ts",
   "cordova": {
     "id": "cordova-plugin-device-orientation",
@@ -12,13 +12,8 @@
       "browser"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/apache/cordova-plugin-device-orientation"
-  },
-  "bugs": {
-    "url": "https://issues.apache.org/jira/browse/CB"
-  },
+  "repository": "github:apache/cordova-plugin-device-orientation",
+  "bugs": "https://github.com/apache/cordova-plugin-device-orientation/issues",
   "keywords": [
     "cordova",
     "device",
