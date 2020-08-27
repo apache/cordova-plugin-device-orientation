@@ -61,15 +61,10 @@ Report issues on the [Apache Cordova issue tracker](https://issues.apache.org/ji
 
 ## Supported Platforms
 
-- Amazon Fire OS
 - Android
-- BlackBerry 10
 - Browser
-- Firefox OS
 - iOS
-- Tizen
-- Windows Phone 7 and 8 (if available in hardware)
-- Windows 8
+- Windows
 
 ## Methods
 
@@ -141,23 +136,7 @@ Only one `watchHeading` can be in effect at one time in iOS.  If a
 changes. Watching heading changes with a filter is more efficient than
 with time intervals.
 
-### Amazon Fire OS Quirks
-
-- `filter` is not supported.
-
 ### Android Quirks
-
-- No support for `filter`.
-
-### Firefox OS Quirks
-
-- No support for `filter`.
-
-### Tizen Quirks
-
-- No support for `filter`.
-
-### Windows Phone 7 and 8 Quirks
 
 - No support for `filter`.
 
@@ -191,20 +170,7 @@ A `CompassHeading` object is returned to the `compassSuccess` callback function.
 
 - __timestamp__: The time at which this heading was determined.  _(DOMTimeStamp)_
 
-
-### Amazon Fire OS Quirks
-
-- `trueHeading` is not supported, but reports the same value as `magneticHeading`
-
-- `headingAccuracy` is always 0 because there is no difference between the `magneticHeading` and `trueHeading`
-
 ### Android Quirks
-
-- The `trueHeading` property is not supported, but reports the same value as `magneticHeading`.
-
-- The `headingAccuracy` property is always 0 because there is no difference between the `magneticHeading` and `trueHeading`.
-
-### Firefox OS Quirks
 
 - The `trueHeading` property is not supported, but reports the same value as `magneticHeading`.
 
