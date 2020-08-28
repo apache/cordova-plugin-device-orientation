@@ -1,4 +1,4 @@
-﻿/*
+/*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -17,17 +17,14 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
 
-/*jslint sloppy:true */
-/*global Windows:true, require, module, setTimeout */
+/* global Windows */
 
-var CompassHeading = require('cordova-plugin-device-orientation.CompassHeading'),
-    CompassError = require('cordova-plugin-device-orientation.CompassError');
-
+var CompassHeading = require('cordova-plugin-device-orientation.CompassHeading');
+var CompassError = require('cordova-plugin-device-orientation.CompassError');
 
 module.exports = {
-
     onReadingChanged: null,
     getHeading: function (win, lose) {
         var deviceCompass = Windows.Devices.Sensors.Compass.getDefault();
@@ -36,8 +33,8 @@ module.exports = {
                 lose(CompassError.COMPASS_NOT_SUPPORTED);
             }, 0);
         } else {
-            var reading = deviceCompass.getCurrentReading(),
-                heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth, null, reading.timestamp.getTime());
+            var reading = deviceCompass.getCurrentReading();
+            var heading = new CompassHeading(reading.headingMagneticNorth, reading.headingTrueNorth, null, reading.timestamp.getTime());
             setTimeout(function () {
                 win(heading);
             }, 0);
@@ -50,4 +47,4 @@ module.exports = {
     }
 };
 
-require("cordova/exec/proxy").add("Compass", module.exports);
+require('cordova/exec/proxy').add('Compass', module.exports);

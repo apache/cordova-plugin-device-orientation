@@ -17,13 +17,13 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
 
-var CompassHeading = function(magneticHeading, trueHeading, headingAccuracy, timestamp) {
-  this.magneticHeading = magneticHeading;
-  this.trueHeading = trueHeading;
-  this.headingAccuracy = headingAccuracy;
-  this.timestamp = timestamp || new Date().getTime();
+var CompassHeading = function (magneticHeading, trueHeading, headingAccuracy, timestamp) {
+    this.magneticHeading = magneticHeading;
+    this.trueHeading = trueHeading;
+    this.headingAccuracy = headingAccuracy;
+    this.timestamp = timestamp || new Date().getTime();
 };
 
 module.exports = CompassHeading;

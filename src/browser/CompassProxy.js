@@ -17,12 +17,12 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
 
 var Compass = {
-    getHeading: function(success, error) {
+    getHeading: function (success, error) {
         var orient = {};
-        var heading = (Math.round((Math.random() * 360) * 100) / 100);
+        var heading = Math.round(Math.random() * 360 * 100) / 100;
 
         orient.trueHeading = heading;
         orient.magneticHeading = heading;
