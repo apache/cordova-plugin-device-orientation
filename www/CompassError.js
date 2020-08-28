@@ -17,15 +17,15 @@
  * specific language governing permissions and limitations
  * under the License.
  *
-*/
+ */
 
 /**
  *  CompassError.
  *  An error code assigned by an implementation when an error has occurred
  * @constructor
  */
-var CompassError = function(err) {
-    this.code = (err !== undefined ? err : null);
+var CompassError = function (err) {
+    this.code = err !== undefined ? err : null;
 };
 
 CompassError.COMPASS_INTERNAL_ERR = 0;
