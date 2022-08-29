@@ -248,7 +248,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
       float I[] = new float[9];
       boolean success = SensorManager.getRotationMatrix(R, I, gravity, magnetic);
       if (success) {
-        // Android recommands using SensorManager.getOrientation() but it has a wontFix
+        // Android recommends using SensorManager.getOrientation() but it has a wontFix
         // bug:
         // https://stackoverflow.com/questions/67824884/pitch-returned-by-getorientation-function-is-wrong
         // So we use Stochastically's method:
