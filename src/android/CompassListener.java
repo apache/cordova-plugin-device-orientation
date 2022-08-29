@@ -40,7 +40,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
-import android.util.Log; // MG
+import org.apache.cordova.LOG;
 
 /**
  * This class listens to the compass sensor and stores the latest heading value.
