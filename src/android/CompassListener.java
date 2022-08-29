@@ -167,7 +167,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
       return this.status;
     }
 
-    // MG, use accelerometer & magnetometer
+    // use accelerometer & magnetometer
     // http://web.archive.org/web/20151205103652/http://www.codingforandroid.com/2011/01/using-orientation-sensors-simple.html
     // https://android-developers.googleblog.com/2010/09/one-screen-turn-deserves-another.html
     // https://stackoverflow.com/questions/15537125/inconsistent-orientation-sensor-values-on-android-for-azimuth-yaw-and-roll/16418016#16418016
