@@ -167,7 +167,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
       return this.status;
     }
 
-    // MG, try to use accelerometer & magnetometer
+    // MG, use accelerometer & magnetometer
     // http://web.archive.org/web/20151205103652/http://www.codingforandroid.com/2011/01/using-orientation-sensors-simple.html
     // https://android-developers.googleblog.com/2010/09/one-screen-turn-deserves-another.html
     // https://stackoverflow.com/questions/15537125/inconsistent-orientation-sensor-values-on-android-for-azimuth-yaw-and-roll/16418016#16418016
@@ -180,20 +180,8 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
       this.setStatus(CompassListener.STARTING);
 
     } else {
-      // Try the old way
-      // Get compass sensor from sensor manager
-      @SuppressWarnings("deprecation")
-      List<Sensor> list = this.sensorManager.getSensorList(Sensor.TYPE_ORIENTATION);
-      // If found, then register as listener
-      if (list != null && list.size() > 0) {
-        this.mSensor = list.get(0);
-        this.sensorManager.registerListener(this, this.mSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        this.lastAccessTime = System.currentTimeMillis();
-        this.setStatus(CompassListener.STARTING);
-      } else {
-        // If error, then set status to error
-        this.setStatus(CompassListener.ERROR_FAILED_TO_START);
-      }
+      // If error, then set status to error
+      this.setStatus(CompassListener.ERROR_FAILED_TO_START);
     }
     return this.status;
   }
@@ -239,7 +227,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
    */
   @SuppressWarnings("deprecation")
   public void onSensorChanged(SensorEvent event) {
-    float alpha = (float) 0.8; // low pass filter;
+    float alpha = (float) 0.5; // low pass filter;
     float heading = (0f / 0f); // NaN
     switch (event.sensor.getType()) {
       case Sensor.TYPE_ACCELEROMETER:
@@ -253,11 +241,6 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
         break;
       case Sensor.TYPE_MAGNETIC_FIELD:
         magnetic = event.values;
-        break;
-      case Sensor.TYPE_ORIENTATION:
-        // Do it the old way
-        // We only care about the orientation as far as it refers to Magnetic North
-        heading = event.values[0];
         break;
     }
     if (isNaN(heading) && gravity != null && magnetic != null) {
@@ -282,8 +265,8 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     // Save heading
     if (!isNaN(heading)) {
       this.heading = heading;
-      this.timeStamp = System.currentTimeMillis();
     }
+    this.timeStamp = System.currentTimeMillis();
     this.setStatus(CompassListener.RUNNING);
 
     // If heading hasn't been read for TIMEOUT time, then turn off compass sensor to
