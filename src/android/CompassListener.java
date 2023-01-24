@@ -227,7 +227,8 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
    */
   @SuppressWarnings("deprecation")
   public void onSensorChanged(SensorEvent event) {
-    float alpha = (float) 0.5; // low pass filter;
+    float alpha = (float) 0.9; // low pass gamma filter;
+    float beta = (float) 0.9; // low pass mag filter;
     float heading = (0f / 0f); // NaN
     switch (event.sensor.getType()) {
       case Sensor.TYPE_ACCELEROMETER:
@@ -240,7 +241,14 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
         gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
         break;
       case Sensor.TYPE_MAGNETIC_FIELD:
-        magnetic = event.values;
+        // Isolate the force of magnetic with the low-pass filter.
+        if (magnetic == null) {
+          gravity = new float[3];
+        }
+        magnetic[0] = beta * magnetic[0] + (1 - beta) * event.values[0];
+        magnetic[1] = beta * magnetic[1] + (1 - beta) * event.values[1];
+        magnetic[2] = beta * magnetic[2] + (1 - beta) * event.values[2];
+        // magnetic = event.values;
         break;
     }
     if (isNaN(heading) && gravity != null && magnetic != null) {
