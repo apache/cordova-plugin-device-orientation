@@ -40,7 +40,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
-import android.util.Log; // MG
+import org.apache.cordova.LOG;
 
 /**
  * This class listens to the compass sensor and stores the latest heading value.
@@ -167,7 +167,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
       return this.status;
     }
 
-    // MG, use accelerometer & magnetometer
+    // use accelerometer & magnetometer
     // http://web.archive.org/web/20151205103652/http://www.codingforandroid.com/2011/01/using-orientation-sensors-simple.html
     // https://android-developers.googleblog.com/2010/09/one-screen-turn-deserves-another.html
     // https://stackoverflow.com/questions/15537125/inconsistent-orientation-sensor-values-on-android-for-azimuth-yaw-and-roll/16418016#16418016
@@ -256,7 +256,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
       float I[] = new float[9];
       boolean success = SensorManager.getRotationMatrix(R, I, gravity, magnetic);
       if (success) {
-        // Android recommands using SensorManager.getOrientation() but it has a wontFix
+        // Android recommends using SensorManager.getOrientation() but it has a wontFix
         // bug:
         // https://stackoverflow.com/questions/67824884/pitch-returned-by-getorientation-function-is-wrong
         // So we use Stochastically's method:
