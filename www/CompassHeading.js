@@ -19,11 +19,14 @@
  *
  */
 
-var CompassHeading = function (magneticHeading, trueHeading, headingAccuracy, timestamp) {
-    this.magneticHeading = magneticHeading;
-    this.trueHeading = trueHeading;
-    this.headingAccuracy = headingAccuracy;
-    this.timestamp = timestamp || new Date().getTime();
+var CompassHeading = function (obj) {
+    if (obj.sinHeading != undefined) this.sinHeading = obj.sinHeading;
+    if (obj.cosHeading != undefined) this.cosHeading = obj.cosHeading;
+    this.headingAccuracy = obj.headingAccuracy;
+    if (obj.magneticHeading != undefined) this.magneticHeading = obj.magneticHeading;
+    if (obj.trueHeading != undefined) this.trueHeading = obj.trueHeading;
+    if (obj.timeStamp != undefined) this.timeStamp = obj.timeStamp;
+    else this.timeStamp = Date.now();
 };
 
 module.exports = CompassHeading;

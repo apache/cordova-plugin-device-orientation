@@ -55,7 +55,10 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
   public long TIMEOUT = 30000; // Timeout in msec to shut off listener
 
   int status; // status of listener
-  float heading; // most recent heading value
+  // float heading; // most recent heading value
+  // Replaced by sin & cos
+  float sinHeading; // sin of most recent heading value
+  float cosHeading; // cos of most recent heading value
   long timeStamp; // time of most recent value
   long lastAccessTime; // time the value was last retrieved
   int accuracy; // accuracy of the sensor
@@ -65,6 +68,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
 
   Sensor accelerometer;
   Sensor magnetometer;
+  Sensor gyroscope;
 
   private CallbackContext callbackContext;
 
@@ -72,7 +76,8 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
    * Constructor.
    */
   public CompassListener() {
-    this.heading = 0;
+    this.sinHeading = 0;
+    this.cosHeading = 0;
     this.timeStamp = 0;
     this.setStatus(CompassListener.STOPPED);
   }
@@ -161,6 +166,9 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
    * @return status of listener
    */
   public int start() {
+    // final int SENSOR_DELAY = sensorManager.SENSOR_DELAY_NORMAL;
+    final int SENSOR_DELAY = sensorManager.SENSOR_DELAY_UI;
+    // final int SENSOR_DELAY = sensorManager.SENSOR_DELAY_GAME;
 
     // If already starting or running, then just return
     if ((this.status == CompassListener.RUNNING) || (this.status == CompassListener.STARTING)) {
@@ -171,11 +179,12 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     // http://web.archive.org/web/20151205103652/http://www.codingforandroid.com/2011/01/using-orientation-sensors-simple.html
     // https://android-developers.googleblog.com/2010/09/one-screen-turn-deserves-another.html
     // https://stackoverflow.com/questions/15537125/inconsistent-orientation-sensor-values-on-android-for-azimuth-yaw-and-roll/16418016#16418016
-    accelerometer = this.sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    accelerometer = this.sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
     magnetometer = this.sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-    if (accelerometer != null || magnetometer != null) {
-      this.sensorManager.registerListener(this, this.magnetometer, SensorManager.SENSOR_DELAY_NORMAL);
-      this.sensorManager.registerListener(this, this.accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    gyroscope = this.sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+    if (accelerometer != null || magnetometer != null || gyroscope != null) {
+      this.sensorManager.registerListener(this, this.magnetometer, SENSOR_DELAY);
+      this.sensorManager.registerListener(this, this.accelerometer, SENSOR_DELAY);
       this.lastAccessTime = System.currentTimeMillis();
       this.setStatus(CompassListener.STARTING);
 
@@ -227,31 +236,32 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
    */
   @SuppressWarnings("deprecation")
   public void onSensorChanged(SensorEvent event) {
-    float alpha = (float) 0.9; // low pass gamma filter;
-    float beta = (float) 0.9; // low pass mag filter;
-    float heading = (0f / 0f); // NaN
+    float sinHeading = (0f / 0f); // NaN
+    float cosHeading = (0f / 0f); // NaN
+
+    long myNow = System.currentTimeMillis();
     switch (event.sensor.getType()) {
-      case Sensor.TYPE_ACCELEROMETER:
+      case Sensor.TYPE_GRAVITY:
         // Isolate the force of gravity with the low-pass filter.
         if (gravity == null) {
           gravity = new float[3];
         }
-        gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
-        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
-        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
-        break;
+        gravity = event.values;
+        return;
+      // break;
       case Sensor.TYPE_MAGNETIC_FIELD:
-        // Isolate the force of magnetic with the low-pass filter.
+        // Dampen magnetic with the low-pass filter.
         if (magnetic == null) {
-          gravity = new float[3];
+          magnetic = new float[3];
         }
-        magnetic[0] = beta * magnetic[0] + (1 - beta) * event.values[0];
-        magnetic[1] = beta * magnetic[1] + (1 - beta) * event.values[1];
-        magnetic[2] = beta * magnetic[2] + (1 - beta) * event.values[2];
-        // magnetic = event.values;
+        magnetic = event.values;
+        // return;
         break;
     }
-    if (isNaN(heading) && gravity != null && magnetic != null) {
+
+    // if (isNaN(heading) && gravity != null && magnetic != null && rotation !=
+    // null) {
+    if (gravity != null && magnetic != null) {
       float R[] = new float[9];
       float I[] = new float[9];
       boolean success = SensorManager.getRotationMatrix(R, I, gravity, magnetic);
@@ -265,14 +275,12 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
         // Beware also of screen orientation:
         // https://android-developers.googleblog.com/2010/09/one-screen-turn-deserves-another.html
 
-        heading = (float) Math.atan2((double) (R[1] - R[3]), (double) (R[0] + R[4]));
-        heading = toDeg(heading);
-        // Log.v("MGMG", "heading: " + heading);
+        // heading = (float) Math.atan2((double) (R[1] - R[3]), (double) (R[0] + R[4]));
+        // heading = toDeg(heading);
+        // Replaced by sin & cos
+        this.sinHeading = R[1] - R[3];
+        this.cosHeading = R[0] + R[4];
       }
-    }
-    // Save heading
-    if (!isNaN(heading)) {
-      this.heading = heading;
     }
     this.timeStamp = System.currentTimeMillis();
     this.setStatus(CompassListener.RUNNING);
@@ -291,16 +299,6 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
    */
   public int getStatus() {
     return this.status;
-  }
-
-  /**
-   * Get the most recent compass heading.
-   *
-   * @return heading
-   */
-  public float getHeading() {
-    this.lastAccessTime = System.currentTimeMillis();
-    return this.heading;
   }
 
   /**
@@ -339,14 +337,17 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
    */
   private JSONObject getCompassHeading() throws JSONException {
     JSONObject obj = new JSONObject();
+    long myNow = System.currentTimeMillis();
 
-    obj.put("magneticHeading", this.getHeading());
-    obj.put("trueHeading", this.getHeading());
+    // obj.put("magneticHeading", this.heading);
+    // obj.put("trueHeading", this.heading);
+    obj.put("sinHeading", this.sinHeading);
+    obj.put("cosHeading", this.cosHeading);
     // Since the magnetic and true heading are always the same our and accuracy
     // is defined as the difference between true and magnetic always return zero
     obj.put("headingAccuracy", 0);
-    obj.put("timestamp", this.timeStamp);
-
+    obj.put("timeStamp", myNow);
+    this.lastAccessTime = myNow;
     return obj;
   }
 
