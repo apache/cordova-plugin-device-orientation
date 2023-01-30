@@ -61,14 +61,11 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
   float cosHeading; // cos of most recent heading value
   long timeStamp; // time of most recent value
   long lastAccessTime; // time the value was last retrieved
-  int accuracy; // accuracy of the sensor
+  int rotationAccuracy = 2; // SENSOR_STATUS_ACCURACY_MEDIUM accuracy of the sensor
 
   private SensorManager sensorManager;// Sensor manager
-  Sensor mSensor; // Compass sensor returned by sensor manager
 
-  Sensor accelerometer;
-  Sensor magnetometer;
-  Sensor gyroscope;
+  Sensor rvSensor; // Compass sensor returned by sensor manager
 
   private CallbackContext callbackContext;
 
@@ -179,12 +176,9 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     // http://web.archive.org/web/20151205103652/http://www.codingforandroid.com/2011/01/using-orientation-sensors-simple.html
     // https://android-developers.googleblog.com/2010/09/one-screen-turn-deserves-another.html
     // https://stackoverflow.com/questions/15537125/inconsistent-orientation-sensor-values-on-android-for-azimuth-yaw-and-roll/16418016#16418016
-    accelerometer = this.sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
-    magnetometer = this.sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-    gyroscope = this.sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-    if (accelerometer != null || magnetometer != null || gyroscope != null) {
-      this.sensorManager.registerListener(this, this.magnetometer, SENSOR_DELAY);
-      this.sensorManager.registerListener(this, this.accelerometer, SENSOR_DELAY);
+    rvSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+    if (rvSensor != null) {
+      this.sensorManager.registerListener(this, this.rvSensor, SENSOR_DELAY);
       this.lastAccessTime = System.currentTimeMillis();
       this.setStatus(CompassListener.STARTING);
 
@@ -222,8 +216,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     }
   }
 
-  private float gravity[] = null;
-  private float magnetic[] = null;
+  private float rotationVector[] = null;
 
   private float toDeg(float x) {
     return x * 180 / (float) Math.PI; // Convert to degrees
@@ -241,46 +234,32 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
 
     long myNow = System.currentTimeMillis();
     switch (event.sensor.getType()) {
-      case Sensor.TYPE_GRAVITY:
-        // Isolate the force of gravity with the low-pass filter.
-        if (gravity == null) {
-          gravity = new float[3];
+      case Sensor.TYPE_ROTATION_VECTOR:
+        if (rotationVector == null) {
+          rotationVector = new float[3];
         }
-        gravity = event.values;
-        return;
-      // break;
-      case Sensor.TYPE_MAGNETIC_FIELD:
-        // Dampen magnetic with the low-pass filter.
-        if (magnetic == null) {
-          magnetic = new float[3];
-        }
-        magnetic = event.values;
-        // return;
+        rotationVector = event.values;
+        this.rotationAccuracy = event.accuracy;
         break;
     }
 
-    // if (isNaN(heading) && gravity != null && magnetic != null && rotation !=
-    // null) {
-    if (gravity != null && magnetic != null) {
+    if (rotationVector != null) {
       float R[] = new float[9];
-      float I[] = new float[9];
-      boolean success = SensorManager.getRotationMatrix(R, I, gravity, magnetic);
-      if (success) {
-        // Android recommends using SensorManager.getOrientation() but it has a wontFix
-        // bug:
-        // https://stackoverflow.com/questions/67824884/pitch-returned-by-getorientation-function-is-wrong
-        // So we use Stochastically's method:
-        // https://stackoverflow.com/questions/15537125/inconsistent-orientation-sensor-values-on-android-for-azimuth-yaw-and-roll/16418016#16418016
-        // which works like a charm.
-        // Beware also of screen orientation:
-        // https://android-developers.googleblog.com/2010/09/one-screen-turn-deserves-another.html
+      SensorManager.getRotationMatrixFromVector(R, event.values);
+      // Android recommends using SensorManager.getOrientation() but it has a wontFix
+      // bug:
+      // https://stackoverflow.com/questions/67824884/pitch-returned-by-getorientation-function-is-wrong
+      // So we use Stochastically's method:
+      // https://stackoverflow.com/questions/15537125/inconsistent-orientation-sensor-values-on-android-for-azimuth-yaw-and-roll/16418016#16418016
+      // which works like a charm.
+      // Beware also of screen orientation:
+      // https://android-developers.googleblog.com/2010/09/one-screen-turn-deserves-another.html
 
-        // heading = (float) Math.atan2((double) (R[1] - R[3]), (double) (R[0] + R[4]));
-        // heading = toDeg(heading);
-        // Replaced by sin & cos
-        this.sinHeading = R[1] - R[3];
-        this.cosHeading = R[0] + R[4];
-      }
+      // heading = (float) Math.atan2((double) (R[1] - R[3]), (double) (R[0] + R[4]));
+      // heading = toDeg(heading);
+      // Replaced by sin & cos
+      this.sinHeading = R[1] - R[3];
+      this.cosHeading = R[0] + R[4];
     }
     this.timeStamp = System.currentTimeMillis();
     this.setStatus(CompassListener.RUNNING);
@@ -345,10 +324,9 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     obj.put("cosHeading", this.cosHeading);
     // Since the magnetic and true heading are always the same our and accuracy
     // is defined as the difference between true and magnetic always return zero
-    obj.put("headingAccuracy", 0);
+    obj.put("headingAccuracy", rotationAccuracy);
     obj.put("timeStamp", myNow);
     this.lastAccessTime = myNow;
     return obj;
   }
-
 }
