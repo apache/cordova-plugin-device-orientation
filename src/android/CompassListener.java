@@ -66,6 +66,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
   private SensorManager sensorManager;// Sensor manager
 
   Sensor rvSensor; // Compass sensor returned by sensor manager
+  Sensor magSensor; // Magnetic field sensor used for accuracy
 
   private CallbackContext callbackContext;
 
@@ -177,8 +178,12 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     // https://android-developers.googleblog.com/2010/09/one-screen-turn-deserves-another.html
     // https://stackoverflow.com/questions/15537125/inconsistent-orientation-sensor-values-on-android-for-azimuth-yaw-and-roll/16418016#16418016
     rvSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-    if (rvSensor != null) {
+    // Next one only used for getting accuracy
+    magSensor = this.sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+
+    if (rvSensor != null && magSensor != null) {
       this.sensorManager.registerListener(this, this.rvSensor, SENSOR_DELAY);
+      this.sensorManager.registerListener(this, this.magSensor, sensorManager.SENSOR_DELAY_NORMAL);
       this.lastAccessTime = System.currentTimeMillis();
       this.setStatus(CompassListener.STARTING);
 
@@ -239,8 +244,11 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
           rotationVector = new float[3];
         }
         rotationVector = event.values;
-        this.rotationAccuracy = event.accuracy;
         break;
+
+      case Sensor.TYPE_MAGNETIC_FIELD:
+        this.rotationAccuracy = event.accuracy;
+        return;
     }
 
     if (rotationVector != null) {
@@ -309,6 +317,10 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     this.status = status;
   }
 
+  private boolean isNan(float val) {
+    return val != val;
+  }
+
   /**
    * Create the CompassHeading JSON object to be returned to JavaScript
    *
@@ -320,11 +332,14 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
 
     // obj.put("magneticHeading", this.heading);
     // obj.put("trueHeading", this.heading);
-    obj.put("sinHeading", this.sinHeading);
-    obj.put("cosHeading", this.cosHeading);
+    if (!isNan(this.sinHeading))
+      obj.put("sinHeading", this.sinHeading);
+    if (!isNan(this.cosHeading))
+      obj.put("cosHeading", this.cosHeading);
     // Since the magnetic and true heading are always the same our and accuracy
     // is defined as the difference between true and magnetic always return zero
-    obj.put("headingAccuracy", rotationAccuracy);
+    if (!isNan(this.rotationAccuracy))
+      obj.put("headingAccuracy", this.rotationAccuracy);
     obj.put("timeStamp", myNow);
     this.lastAccessTime = myNow;
     return obj;
