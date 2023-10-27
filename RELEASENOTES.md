@@ -20,6 +20,33 @@
 -->
 # Release Notes
 
+### 3.0.0 (Oct 27, 2023)
+
+Breaking:
+
+* [GH-57](https://github.com/apache/cordova-plugin-device-orientation/pull/57) fix!: remove deprecated platforms
+
+**Chores:**
+
+* [GH-83](https://github.com/apache/cordova-plugin-device-orientation/pull/83) chore: add asf config
+* [GH-76](https://github.com/apache/cordova-plugin-device-orientation/pull/76) chore(npm): bump package-lock v2 w/ rebuild
+* [GH-62](https://github.com/apache/cordova-plugin-device-orientation/pull/62) chore: adds `package-lock` file
+* [GH-58](https://github.com/apache/cordova-plugin-device-orientation/pull/58) chore: package cleanup
+* [GH-55](https://github.com/apache/cordova-plugin-device-orientation/pull/55) chore(npm): adds ignore list
+
+**Others:**
+
+* [GH-84](https://github.com/apache/cordova-plugin-device-orientation/pull/84) dep: bump `word-wrap` from `1.2.3` to `1.2.5`
+* [GH-79](https://github.com/apache/cordova-plugin-device-orientation/pull/79) dep: bump `json5` from `1.0.1` to `1.0.2`
+* [GH-77](https://github.com/apache/cordova-plugin-device-orientation/pull/77) ci: sync workflow with paramedic
+* [GH-70](https://github.com/apache/cordova-plugin-device-orientation/pull/70) ci(android): update `java` requirement for `cordova-android`@11
+* [GH-67](https://github.com/apache/cordova-plugin-device-orientation/pull/67) ci(ios): update workflow w/ **iOS** 15
+* [GH-66](https://github.com/apache/cordova-plugin-device-orientation/pull/66) ci: remove old ci service
+* [GH-65](https://github.com/apache/cordova-plugin-device-orientation/pull/65) ci: add github actions workflow
+* [GH-61](https://github.com/apache/cordova-plugin-device-orientation/pull/61) refactor(eslint): use cordova-eslint w/ fix
+* [GH-56](https://github.com/apache/cordova-plugin-device-orientation/pull/56) docs: remove outdated translations
+* [GH-54](https://github.com/apache/cordova-plugin-device-orientation/pull/54) docs: undeprecate plugin
+
 ### 2.0.1 (April 13, 2017)
 * [CB-14002](https://issues.apache.org/jira/browse/CB-14002): Fix `cordovaDependencies` to allow plugin install 
 
