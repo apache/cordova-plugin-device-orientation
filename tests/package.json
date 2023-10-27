@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-device-orientation-tests",
-  "version": "3.0.1-dev",
+  "version": "3.0.0",
   "description": "",
   "cordova": {
     "id": "cordova-plugin-device-orientation-tests",
