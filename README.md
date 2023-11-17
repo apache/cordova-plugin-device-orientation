@@ -119,6 +119,15 @@ ID can be used with `navigator.compass.clearWatch` to stop watching the navigato
 
     var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
 
+### Update 29/08/2022
+
+On Android, the plugin used a `Sensor.TYPE_ORIENTATION` which is [deprecated](https://developer.android.com/guide/topics/sensors/sensors_position).
+This sensor was more and more [omitted](https://github.com/apache/cordova-plugin-device-orientation/issues/64) in new devices.
+So now the plugin uses `Sensor.TYPE_ACCELEROMETER` and `Sensor.TYPE_MAGNETIC_FIELD` which are available everywhere.
+They are fused together as instructed [here](https://developer.android.com/guide/topics/sensors/sensors_position#sensors-pos-orient),
+except that the `SensorManager.getOrientation()` has a [bug that will not be fixed](https://issuetracker.google.com/issues/37127944).
+[Stochastically](https://stackoverflow.com/users/2110762/stochastically) found a [solution](https://stackoverflow.com/questions/15537125/inconsistent-orientation-sensor-values-on-android-for-azimuth-yaw-and-roll/16418016#16418016) that works like a charm and is used here.
+
 
 ### Browser Quirks
 
