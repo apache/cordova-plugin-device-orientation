@@ -103,6 +103,11 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, i));
         }
         else if (action.equals("getHeading")) {
+            // if we didn't get a value for five seconds - stop so it will restart (fixes freezing on some devices)
+            if (this.status == CompassListener.RUNNING && System.currentTimeMillis() - this.timeStamp > 5_000)  {
+                this.stop();
+            }
+
             // If not running, then this is an async call, so don't worry about waiting
             if (this.status != CompassListener.RUNNING) {
                 int r = this.start();
