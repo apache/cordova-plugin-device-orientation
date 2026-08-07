@@ -18,23 +18,24 @@
 */
 package org.apache.cordova.deviceorientation;
 
-import java.util.List;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.view.Surface;
+import android.view.WindowManager;
 
-import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.content.Context;
-
+import java.util.List;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -48,18 +49,27 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     public static int RUNNING = 2;
     public static int ERROR_FAILED_TO_START = 3;
 
-    public long TIMEOUT = 30000;        // Timeout in msec to shut off listener
+    public long TIMEOUT = 30000; // Timeout in msec to shut off listener
 
-    int status;                         // status of listener
-    float heading;                      // most recent heading value
-    long timeStamp;                     // time of most recent value
-    long lastAccessTime;                // time the value was last retrieved
-    int accuracy;                       // accuracy of the sensor
+    int status; // status of listener
+    float heading; // most recent heading value
+    long timeStamp; // time of most recent value
+    long lastAccessTime; // time the value was last retrieved
+    int accuracy; // accuracy of the sensor
+    float pitch; // new variable to store pitch
 
-    private SensorManager sensorManager;// Sensor manager
-    Sensor mSensor;                     // Compass sensor returned by sensor manager
+    private SensorManager sensorManager; // Sensor manager
+    private Sensor rotationVectorSensor;
+    private Sensor magneticFieldSensor;
+    private Sensor gravitySensor; // new sensor for gravity
 
     private CallbackContext callbackContext;
+
+    // New variables for Rotation Vector sensor
+    private final float[] rotationMatrix = new float[9];
+    private final float[] adjustedRotationMatrix = new float[9];
+    private final float[] orientationAngles = new float[3];
+    private final float[] gravityVector = new float[3]; // new vector for gravity
 
     /**
      * Constructor.
@@ -68,6 +78,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
         this.heading = 0;
         this.timeStamp = 0;
         this.setStatus(CompassListener.STOPPED);
+        this.pitch = 0;
     }
 
     /**
@@ -85,24 +96,21 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     /**
      * Executes the request and returns PluginResult.
      *
-     * @param action                The action to execute.
-     * @param args          	    JSONArry of arguments for the plugin.
-     * @param callbackS=Context     The callback id used when calling back into JavaScript.
-     * @return              	    True if the action was valid.
-     * @throws JSONException 
+     * @param action The action to execute.
+     * @param args JSONArry of arguments for the plugin.
+     * @param callbackContext The callback id used when calling back into JavaScript.
+     * @return True if the action was valid.
+     * @throws JSONException
      */
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("start")) {
             this.start();
-        }
-        else if (action.equals("stop")) {
+        } else if (action.equals("stop")) {
             this.stop();
-        }
-        else if (action.equals("getStatus")) {
+        } else if (action.equals("getStatus")) {
             int i = this.getStatus();
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, i));
-        }
-        else if (action.equals("getHeading")) {
+        } else if (action.equals("getHeading")) {
             // If not running, then this is an async call, so don't worry about waiting
             if (this.status != CompassListener.RUNNING) {
                 int r = this.start();
@@ -119,11 +127,9 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
                 }, 2000);
             }
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, getCompassHeading()));
-        }
-        else if (action.equals("setTimeout")) {
+        } else if (action.equals("setTimeout")) {
             this.setTimeout(args.getLong(0));
-        }
-        else if (action.equals("getTimeout")) {
+        } else if (action.equals("getTimeout")) {
             long l = this.getTimeout();
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, l));
         } else {
@@ -154,7 +160,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     /**
      * Start listening for compass sensor.
      *
-     * @return          status of listener
+     * @return status of listener
      */
     public int start() {
 
@@ -163,20 +169,18 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
             return this.status;
         }
 
-        // Get compass sensor from sensor manager
-        @SuppressWarnings("deprecation")
-        List<Sensor> list = this.sensorManager.getSensorList(Sensor.TYPE_ORIENTATION);
+        // Get sensors from sensor manager
+        rotationVectorSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+        magneticFieldSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        gravitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
 
-        // If found, then register as listener
-        if (list != null && list.size() > 0) {
-            this.mSensor = list.get(0);
-            this.sensorManager.registerListener(this, this.mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        if (rotationVectorSensor != null && magneticFieldSensor != null && gravitySensor != null) {
+            sensorManager.registerListener(this, rotationVectorSensor, SensorManager.SENSOR_DELAY_FASTEST);
+            sensorManager.registerListener(this, magneticFieldSensor, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, gravitySensor, SensorManager.SENSOR_DELAY_NORMAL);
             this.lastAccessTime = System.currentTimeMillis();
             this.setStatus(CompassListener.STARTING);
-        }
-
-        // If error, then set status to error
-        else {
+        } else {
             this.setStatus(CompassListener.ERROR_FAILED_TO_START);
         }
 
@@ -194,7 +198,9 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     }
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // TODO Auto-generated method stub
+        if (sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+            this.accuracy = accuracy;
+        }
     }
 
     /**
@@ -212,28 +218,69 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     /**
      * Sensor listener event.
      *
-     * @param SensorEvent event
+     * @param event SensorEvent
      */
     public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
+            SensorManager.getRotationMatrixFromVector(rotationMatrix, event.values);
 
-        // We only care about the orientation as far as it refers to Magnetic North
-        float heading = event.values[0];
+            int rotation = cordova.getActivity().getWindowManager().getDefaultDisplay().getRotation();
+            switch (rotation) {
+                case Surface.ROTATION_0:
+                    SensorManager.remapCoordinateSystem(rotationMatrix,
+                            SensorManager.AXIS_X, SensorManager.AXIS_Y,
+                            adjustedRotationMatrix);
+                    break;
+                case Surface.ROTATION_90:
+                    SensorManager.remapCoordinateSystem(rotationMatrix,
+                            SensorManager.AXIS_Y, SensorManager.AXIS_MINUS_X,
+                            adjustedRotationMatrix);
+                    break;
+                case Surface.ROTATION_180:
+                    SensorManager.remapCoordinateSystem(rotationMatrix,
+                            SensorManager.AXIS_MINUS_X, SensorManager.AXIS_MINUS_Y,
+                            adjustedRotationMatrix);
+                    break;
+                case Surface.ROTATION_270:
+                    SensorManager.remapCoordinateSystem(rotationMatrix,
+                            SensorManager.AXIS_MINUS_Y, SensorManager.AXIS_X,
+                            adjustedRotationMatrix);
+                    break;
+            }
 
-        // Save heading
-        this.timeStamp = System.currentTimeMillis();
-        this.heading = heading;
-        this.setStatus(CompassListener.RUNNING);
+            SensorManager.getOrientation(adjustedRotationMatrix, orientationAngles);
 
-        // If heading hasn't been read for TIMEOUT time, then turn off compass sensor to save power
-        if ((this.timeStamp - this.lastAccessTime) > this.TIMEOUT) {
-            this.stop();
+            float azimuth = orientationAngles[0];
+            // Convert radians to degrees and normalise to a 0-360 range
+            // TODO: Using the Device upside down - negative pitch
+            if (this.pitch < 90) {
+                this.heading = (float) (Math.toDegrees(azimuth) + 360) % 360;
+            } else {
+                this.heading = (float) (Math.toDegrees(azimuth) + 180 + 360) % 360;
+            }
+            this.timeStamp = System.currentTimeMillis();
+            this.setStatus(CompassListener.RUNNING);
+
+            // If heading hasn't been read for TIMEOUT time, then turn off compass sensor to save power
+            if ((this.timeStamp - this.lastAccessTime) > this.TIMEOUT) {
+                this.stop();
+            }
+        }
+
+        // New section to handle gravity sensor data
+        if (event.sensor.getType() == Sensor.TYPE_GRAVITY) {
+            this.gravityVector[0] = event.values[0];
+            this.gravityVector[1] = event.values[1];
+            this.gravityVector[2] = event.values[2];
+            // Calculate pitch from gravity sensor data
+            this.pitch = (float) Math.toDegrees(Math.atan2(this.gravityVector[1], this.gravityVector[2]));
         }
     }
 
     /**
      * Get status of compass sensor.
      *
-     * @return          status
+     * @return status
      */
     public int getStatus() {
         return this.status;
@@ -242,7 +289,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     /**
      * Get the most recent compass heading.
      *
-     * @return          heading
+     * @return heading
      */
     public float getHeading() {
         this.lastAccessTime = System.currentTimeMillis();
@@ -252,7 +299,7 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
     /**
      * Set the timeout to turn off compass sensor if getHeading() hasn't been called.
      *
-     * @param timeout       Timeout in msec.
+     * @param timeout Timeout in msec.
      */
     public void setTimeout(long timeout) {
         this.TIMEOUT = timeout;
@@ -285,12 +332,10 @@ public class CompassListener extends CordovaPlugin implements SensorEventListene
 
         obj.put("magneticHeading", this.getHeading());
         obj.put("trueHeading", this.getHeading());
-        // Since the magnetic and true heading are always the same our and accuracy
-        // is defined as the difference between true and magnetic always return zero
-        obj.put("headingAccuracy", 0);
+        obj.put("headingAccuracy", this.accuracy);
         obj.put("timestamp", this.timeStamp);
+        obj.put("pitch", this.pitch);
 
         return obj;
     }
-
 }
