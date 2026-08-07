@@ -21,11 +21,11 @@
 
 /* global cordova */
 
-var argscheck = require('cordova/argscheck');
-var exec = require('cordova/exec');
-var utils = require('cordova/utils');
-var CompassHeading = require('./CompassHeading');
-var CompassError = require('./CompassError');
+var argscheck = require("cordova/argscheck");
+var exec = require("cordova/exec");
+var utils = require("cordova/utils");
+var CompassHeading = require("./CompassHeading");
+var CompassError = require("./CompassError");
 
 var timers = {};
 var eventTimerId = null;
@@ -39,10 +39,11 @@ var compass = {
      * @param {CompassOptions} options The options for getting the heading data (not used).
      */
     getCurrentHeading: function (successCallback, errorCallback, options) {
-        argscheck.checkArgs('fFO', 'compass.getCurrentHeading', arguments);
+        argscheck.checkArgs("fFO", "compass.getCurrentHeading", arguments);
 
         var win = function (result) {
-            var ch = new CompassHeading(result.magneticHeading, result.trueHeading, result.headingAccuracy, result.timestamp);
+            // var ch = new CompassHeading(result.magneticHeading, result.trueHeading, result.headingAccuracy, result.timestamp);
+            var ch = new CompassHeading(result);
             successCallback(ch);
         };
         var fail =
@@ -53,7 +54,7 @@ var compass = {
             };
 
         // Get heading
-        exec(win, fail, 'Compass', 'getHeading', [options]);
+        exec(win, fail, "Compass", "getHeading", [options]);
     },
 
     /**
@@ -67,15 +68,16 @@ var compass = {
      * specifies to watch via a distance filter rather than time.
      */
     watchHeading: function (successCallback, errorCallback, options) {
-        argscheck.checkArgs('fFO', 'compass.watchHeading', arguments);
+        argscheck.checkArgs("fFO", "compass.watchHeading", arguments);
         // Default interval (100 msec)
-        var frequency = options !== undefined && options.frequency !== undefined ? options.frequency : 100;
+        var frequency =
+            options !== undefined && options.frequency !== undefined ? options.frequency : 100;
         var filter = options !== undefined && options.filter !== undefined ? options.filter : 0;
 
         var id = utils.createUUID();
         if (filter > 0) {
             // is an iOS request for watch by filter, no timer needed
-            timers[id] = 'iOS';
+            timers[id] = "iOS";
             compass.getCurrentHeading(successCallback, errorCallback, options);
         } else {
             // Start watch timer to get headings
@@ -84,9 +86,9 @@ var compass = {
             }, frequency);
         }
 
-        if (cordova.platformId === 'browser' && !eventTimerId) {
+        if (cordova.platformId === "browser" && !eventTimerId) {
             // Start firing deviceorientation events if haven't already
-            var deviceorientationEvent = new Event('deviceorientation');
+            var deviceorientationEvent = new Event("deviceorientation");
             eventTimerId = window.setInterval(function () {
                 window.dispatchEvent(deviceorientationEvent);
             }, 200);
@@ -102,11 +104,11 @@ var compass = {
     clearWatch: function (id) {
         // Stop javascript timer & remove from timer list
         if (id && timers[id]) {
-            if (timers[id] !== 'iOS') {
+            if (timers[id] !== "iOS") {
                 clearInterval(timers[id]);
             } else {
                 // is iOS watch by filter so call into device to stop
-                exec(null, null, 'Compass', 'stopHeading', []);
+                exec(null, null, "Compass", "stopHeading", []);
             }
             delete timers[id];
 
@@ -116,7 +118,7 @@ var compass = {
                 eventTimerId = null;
             }
         }
-    }
+    },
 };
 
 module.exports = compass;
